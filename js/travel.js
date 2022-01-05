@@ -6,6 +6,7 @@ class Travel {
     this.next_dir = ""; // desired address
     this.dir = ""; //current movement direction
     this.path = world.path;
+    this.logical_map = world.logical_map;
   }
   /*
 
@@ -40,6 +41,25 @@ We check if we can move to the indicated position
     } else return false;
   }
 
+  isValidPoint(tile) {
+    if (
+      this.logical_map[tile[0] * NCOLS + tile[1]] == 1 ||
+      this.logical_map[tile[0] * NCOLS + tile[1]] == 2 ||
+      this.logical_map[tile[0] * NCOLS + tile[1]] == 3
+    )
+      return true;
+    return false;
+  }
+
+  /*
+
+Check if the tile contains a special decision point
+*/
+  isSpecialPoint(tile) {
+    if (this.logical_map[tile[0] * NCOLS + tile[1]] == 3) return true;
+    return false;
+  }
+
   /*
 We check if we can move to the indicated position or, failing that, we are testing with smaller displacements.
 Returns the number of pixels that was finally able to move.
@@ -69,7 +89,7 @@ Returns 0 if it cannot scroll.
         next_y + offset_y,
         1,
         1
-      ); 
+      );
       if (
         pixel.data[0] == PATH_COLOR_R &&
         pixel.data[1] == PATH_COLOR_G &&
@@ -86,23 +106,27 @@ Returns 0 if it cannot scroll.
     let can = this.checkNextPositionTry("left");
     if (can > 0) {
       this.x -= can;
+      if (this.behaviour != "frightened" && this.behaviour != "returning")
         this.changeFrameSet(this.frame_sets["left"], "loop");
+      else if (this.behaviour == "returning")
+        this.changeFrameSet(this.frame_sets["returning_left"], "loop");
       if (this.x < -23)
         //if we enter the tuner on the left
         this.x = SCREEN_WIDTH;
-    } else {
-      this.mode = "pause";
-    }
+    } else this.mode = "pause";
   }
 
   moveRight() {
     let can = this.checkNextPositionTry("right");
     if (can > 0) {
       this.x += can;
+      if (this.behaviour != "frightened" && this.behaviour != "returning")
         this.changeFrameSet(this.frame_sets["right"], "loop");
+      else if (this.behaviour == "returning")
+        this.changeFrameSet(this.frame_sets["returning_right"], "loop");
     } else this.mode = "pause";
     if (this.x > SCREEN_WIDTH)
-      //if we enter the tuner on the right
+      //if we enter the tuner on the left
       this.x = -23;
   }
 
@@ -110,7 +134,10 @@ Returns 0 if it cannot scroll.
     let can = this.checkNextPositionTry("up");
     if (can > 0) {
       this.y -= can;
+      if (this.behaviour != "frightened" && this.behaviour != "returning")
         this.changeFrameSet(this.frame_sets["up"], "loop");
+      else if (this.behaviour == "returning")
+        this.changeFrameSet(this.frame_sets["returning_up"], "loop");
     } else this.mode = "pause";
   }
 
@@ -118,7 +145,10 @@ Returns 0 if it cannot scroll.
     let can = this.checkNextPositionTry("down");
     if (can > 0) {
       this.y += can;
+      if (this.behaviour != "frightened" && this.behaviour != "returning")
         this.changeFrameSet(this.frame_sets["down"], "loop");
+      else if (this.behaviour == "returning")
+        this.changeFrameSet(this.frame_sets["returning_down"], "loop");
     } else this.mode = "pause";
   }
 

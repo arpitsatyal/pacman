@@ -93,6 +93,7 @@ window.onload = function () {
   function update() {
     if (!game.paused) {
       game.pacman.live(game, controller);
+      game.blinky.live(game);
     }
   }
 
@@ -116,6 +117,7 @@ window.onload = function () {
     "keydown",
     controller.handleKeyDownUp.bind(controller)
   );
+  
   window.addEventListener("keyup", controller.handleKeyDownUp.bind(controller));
 
   assets_manager.loadImages(() => {

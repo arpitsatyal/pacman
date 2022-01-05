@@ -11,20 +11,34 @@ function Game(path_image) {
   this.blinky = new Blinky(this);
   this.inky = new Inky(this);
   this.tile_set = new TileSet();
+
   this.paused = true;
   this.ready_notification = false;
 
+  this.time = 0; //elapsed game time in seconds
+  this.frames_rendered = 0; //game cycles executed
+  this.home_door = "close"; 
+
   this.initialize = () => {
     this.wait(3);
+    this.closeHome();
     this.showReadyNotification(3);
   };
 
   /* The game loop */
   this.start = (updateCallback, renderCallback) => {
     setInterval(() => {
-      updateCallback();
-      renderCallback();
+      this.update(updateCallback, renderCallback);
     }, TIME_DELTA);
+  };
+
+  this.update = function (updateCallback, renderCallback) {
+    if (!this.paused) this.frames_rendered++;
+    if (this.frames_rendered % FPS == 0 && !this.paused) {
+      this.time++;
+    }
+    updateCallback();
+    renderCallback();
   };
 
   /* Wait seconds */
@@ -42,5 +56,10 @@ function Game(path_image) {
     setTimeout(() => {
       this.ready_notification = false;
     }, seconds * 1000);
+  };
+  this.closeHome = function () {
+    this.world.path.fillStyle = "#000000";
+    this.world.path.fillRect(180, 127, 1, 30); // close out
+    this.home_door = "close";
   };
 }

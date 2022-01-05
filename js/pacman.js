@@ -7,7 +7,7 @@ class Pacman extends Travel {
     this.mode = "loop";
 
     this.frame_sets = {
-      right: [0, 1], 
+      right: [0, 1],
       left: [2, 3],
       up: [4, 5],
       down: [6, 7],
@@ -56,5 +56,15 @@ class Pacman extends Travel {
   /* Consume a ball if it exists in your position. */
   eatBall(game) {
     game.world.balls.setBall(this.x, this.y, 0);
+  }
+  /*
+
+Get the current position as a tile.
+Returns the tile as an array of row coordinates, col
+*/
+  getPositionAsTile() {
+    let col = Math.floor(this.x / TILE_SIZE) + 1;
+    let row = Math.floor(this.y / TILE_SIZE) + 1;
+    return [row, col];
   }
 }
