@@ -18,11 +18,11 @@ We check if we can move to the indicated position
     let offset_y = 0;
     if (dir == "left") {
       next_x -= this.speed;
-    } else if (dir == "right") {
+    } else if (dir === "right") {
       next_x += this.speed;
-    } else if (dir == "up") {
+    } else if (dir === "up") {
       next_y -= this.speed;
-    } else if (dir == "down") {
+    } else if (dir === "down") {
       next_y += this.speed;
     }
     let pixel = this.path.getImageData(
@@ -32,9 +32,9 @@ We check if we can move to the indicated position
       1
     ); //+1 is because the position starts at 0 and the function starts at 1
     if (
-      pixel.data[0] == PATH_COLOR_R &&
-      pixel.data[1] == PATH_COLOR_G &&
-      pixel.data[2] == PATH_COLOR_B
+      pixel.data[0] === PATH_COLOR_R &&
+      pixel.data[1] === PATH_COLOR_G &&
+      pixel.data[2] === PATH_COLOR_B
     ) {
       return true;
     } else return false;

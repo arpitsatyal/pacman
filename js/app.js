@@ -44,7 +44,6 @@ window.onload = function () {
   function update() {
     if (!game.paused) {
       game.pacman.live(game, controller);
-      game.world.balls.special_ball_animator.animate();
     }
   }
 
