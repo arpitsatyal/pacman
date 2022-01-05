@@ -6,18 +6,21 @@ the logic of the game, in addition to containing all the objects of elements of 
 function Game(path_image) {
   this.world = new World(path_image);
   this.pacman = new Pacman(this.world);
-
+  this.pinky = new Pinky(this);
+  this.clyde = new Clyde(this);
+  this.blinky = new Blinky(this);
+  this.inky = new Inky(this);
   this.tile_set = new TileSet();
   this.paused = true;
   this.ready_notification = false;
 
-  this.initialize = function () {
+  this.initialize = () => {
     this.wait(3);
     this.showReadyNotification(3);
   };
 
   /* The game loop */
-  this.start = function (updateCallback, renderCallback) {
+  this.start = (updateCallback, renderCallback) => {
     setInterval(() => {
       updateCallback();
       renderCallback();
@@ -29,15 +32,15 @@ function Game(path_image) {
     this.paused = true;
     setTimeout(() => {
       this.paused = false;
-    }, seconds * 1000)
+    }, seconds * 1000);
   };
 
   /* Show ready sign for x seconds. */
-  this.showReadyNotification =(seconds) => {
+  this.showReadyNotification = (seconds) => {
     this.ready_notification = true;
     if (seconds == -1) return;
     setTimeout(() => {
       this.ready_notification = false;
-    }, seconds * 1000)
+    }, seconds * 1000);
   };
 }

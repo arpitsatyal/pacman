@@ -83,10 +83,56 @@ function TileSet() {
     /*73*/ new Frame(108, 108, 12, 12, 0, 0),
     /*74*/ new Frame(120, 108, 12, 12, 0, 0),
     /*75*/ new Frame(132, 108, 12, 12, 0, 0),
-    /*76*/ new Frame(336, 60, 12, 12, 0, 0),
+    /*76*/ new Frame(336, 60, 12, 12, 0, 0), //maps
 
     /*77*/ new Frame(192, 0, 12, 12, 0, 0),
     /*78*/ new Frame(216, 0, 12, 12, 0, 0), //balls
+
+
+     /*79*/ new Frame(0, 216, 24, 24, 1, 1),
+    /*80*/ new Frame(24, 216, 24, 24, 1, 1), //right orange
+    /*81*/ new Frame(48, 216, 24, 24, 1, 1),
+    /*82*/ new Frame(72, 216, 24, 24, 1, 1), //orange down
+    /*83*/ new Frame(96, 216, 24, 24, 1, 1),
+    /*84*/ new Frame(120, 216, 24, 24, 1, 1), //leFramet orange
+    /*85*/ new Frame(144, 216, 24, 24, 1, 1),
+    /*86*/ new Frame(168, 216, 24, 24, 1, 1), //orange up
+
+    /*87*/ new Frame(0, 192, 24, 24, 1, 1),
+    /*88*/ new Frame(24, 192, 24, 24, 1, 1), //pink right
+    /*89*/ new Frame(48, 192, 24, 24, 1, 1),
+    /*90*/ new Frame(72, 192, 24, 24, 1, 1), //pink down
+    /*91*/ new Frame(96, 192, 24, 24, 1, 1),
+    /*92*/ new Frame(120, 192, 24, 24, 1, 1), //leFramet rose
+    /*93*/ new Frame(144, 192, 24, 24, 1, 1),
+    /*94*/ new Frame(168, 192, 24, 24, 1, 1), //pink top
+
+    /*95*/ new Frame(0, 144, 24, 24, 1, 1),
+    /*96*/ new Frame(24, 144, 24, 24, 1, 1), //right red
+    /*97*/ new Frame(48, 144, 24, 24, 1, 1),
+    /*98*/ new Frame(72, 144, 24, 24, 1, 1), //red down
+    /*99*/ new Frame(96, 144, 24, 24, 1, 1),
+    /*100*/ new Frame(120, 144, 24, 24, 1, 1), //red leFramet
+    /*101*/ new Frame(144, 144, 24, 24, 1, 1),
+    /*102*/ new Frame(168, 144, 24, 24, 1, 1), //red top
+
+    /*103*/ new Frame(192, 192, 24, 24, 1, 1),
+    /*104*/ new Frame(216, 192, 24, 24, 1, 1), //right blue
+    /*105*/ new Frame(240, 192, 24, 24, 1, 1),
+    /*106*/ new Frame(264, 192, 24, 24, 1, 1), //blue down
+    /*107*/ new Frame(288, 192, 24, 24, 1, 1),
+    /*108*/ new Frame(312, 192, 24, 24, 1, 1), //blue leFramet
+    /*109*/ new Frame(336, 192, 24, 24, 1, 1),
+    /*110*/ new Frame(360, 192, 24, 24, 1, 1), //blue up
+
+    /*111*/ new Frame(192, 216, 24, 24, 0, 0),
+    /*112*/ new Frame(216, 216, 24, 24, 0, 0), //right eyes
+    /*113*/ new Frame(240, 216, 24, 24, 0, 0),
+    /*114*/ new Frame(264, 216, 24, 24, 0, 0), //eyes down
+    /*115*/ new Frame(288, 216, 24, 24, 0, 0),
+    /*116*/ new Frame(312, 216, 24, 24, 0, 0), //eyes leFramet
+    /*117*/ new Frame(336, 216, 24, 24, 0, 0),
+    /*118*/ new Frame(360, 216, 24, 24, 0, 0), //eyes up
 
   ];
 }

@@ -16,6 +16,10 @@ const PATH_COLOR_B = 30;
 
 //INITIAL POSITIONS
 const PACMAN_INIT_POS = [156, 270];
+const BLINKY_INIT_POS = [156, 126];
+const INKY_INIT_POS = [132, 167];
+const PINKY_INIT_POS = [156, 159];
+const CLYDE_INIT_POS = [180, 163];
 
 //SPRITES
 const ASSETS_SPRITES = "assets/spritemap.png";

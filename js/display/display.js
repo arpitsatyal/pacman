@@ -69,7 +69,7 @@ class Display {
     );
   }
 
-  drawMap = function (image, game) {
+  drawMap(image, game) {
     for (let i = 0; i < game.world.graphic_map.length; i++) {
       let frame;
       frame = game.tile_set.frames[game.world.graphic_map[i]];
@@ -125,4 +125,25 @@ class Display {
       }
     }
   }
+  drawObject(
+    image,
+    source_x,
+    source_y,
+    destination_x,
+    destination_y,
+    width,
+    height
+  ) {
+    this.buffer.drawImage(
+      image,
+      source_x,
+      source_y,
+      width,
+      height,
+      Math.round(destination_x),
+      Math.round(destination_y),
+      width,
+      height
+    );
+  };
 }

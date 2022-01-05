@@ -7,7 +7,7 @@ class Pacman extends Travel {
     this.mode = "loop";
 
     this.frame_sets = {
-      right: [0, 1], //these are the indices of the array Game.tileset.frames
+      right: [0, 1], 
       left: [2, 3],
       up: [4, 5],
       down: [6, 7],

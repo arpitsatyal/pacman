@@ -24,6 +24,55 @@ window.onload = function () {
       frame_aux.width,
       frame_aux.height
     );
+
+    //blinky
+    frame_aux = game.tile_set.frames[game.blinky.frame_value];
+    display.drawObject(
+      assets_manager.tile_set_image,
+      frame_aux.x,
+      frame_aux.y,
+      game.blinky.x + frame_aux.offset_x,
+      game.blinky.y + frame_aux.offset_y,
+      frame_aux.width,
+      frame_aux.height
+    );
+
+    //inky
+    frame_aux = game.tile_set.frames[game.inky.frame_value];
+    display.drawObject(
+      assets_manager.tile_set_image,
+      frame_aux.x,
+      frame_aux.y,
+      game.inky.x + frame_aux.offset_x,
+      game.inky.y + frame_aux.offset_y,
+      frame_aux.width,
+      frame_aux.height
+    );
+
+    //clyde
+    frame_aux = game.tile_set.frames[game.clyde.frame_value];
+    display.drawObject(
+      assets_manager.tile_set_image,
+      frame_aux.x,
+      frame_aux.y,
+      game.clyde.x + frame_aux.offset_x,
+      game.clyde.y + frame_aux.offset_y,
+      frame_aux.width,
+      frame_aux.height
+    );
+
+    //pinky
+    frame_aux = game.tile_set.frames[game.pinky.frame_value];
+    display.drawObject(
+      assets_manager.tile_set_image,
+      frame_aux.x,
+      frame_aux.y,
+      game.pinky.x + frame_aux.offset_x,
+      game.pinky.y + frame_aux.offset_y,
+      frame_aux.width,
+      frame_aux.height
+    );
+
     //ready notification
     if (game.ready_notification) {
       display.drawObject(
@@ -71,7 +120,7 @@ window.onload = function () {
 
   assets_manager.loadImages(() => {
     game = new Game(assets_manager.path_image);
-    resize(); 
+    resize();
     game.initialize();
     game.start(update, render);
   });

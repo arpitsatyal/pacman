@@ -1,5 +1,5 @@
-function Frame(x, y, width, height, offset_x, offset_y) {
-
+class Frame {
+  constructor(x, y, width, height, offset_x, offset_y) {
     this.x        = x;
     this.y        = y;
     this.width    = width;
@@ -8,4 +8,5 @@ function Frame(x, y, width, height, offset_x, offset_y) {
     this.offset_x = offset_x;
     this.offset_y = offset_y; 
   
-  };
+  }
+}

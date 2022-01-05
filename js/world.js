@@ -4,6 +4,7 @@ function World(path_image){
     this.width = SCREEN_WIDTH;
     this.tile_columns = this.width / TILE_SIZE; // 28 columns
     this.tile_rows = this.height / TILE_SIZE; //31 rows
+    //76 => vaccum
     this.graphic_map = [
         //      00,01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
         /*00*/  25,34,34,34,34,34,34,34,34,34,34,34,34,51,50,34,34,34,34,34,34,34,34,34,34,34,34,24,
@@ -37,7 +38,7 @@ function World(path_image){
         /*28*/  27,76,19,12,12,12,12,12,12,12,12,18,76,19,18,76,19,12,12,12,12,12,12,12,12,18,76,26,
         /*29*/  27,76,76,76,76,76,76,76,76,76,76,76,76,76,76,76,76,76,76,76,76,76,76,76,76,76,76,26,
         /*30*/  29,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,28,
-        ];
+        ]; //868
   
     this.balls = new Balls();
     
@@ -45,6 +46,5 @@ function World(path_image){
     this.path.canvas.width = path_image.width;
     this.path.canvas.height = path_image.height;
     this.path.drawImage(path_image,0,0, path_image.width, path_image.height);
-
     
 }
