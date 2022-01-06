@@ -26,7 +26,6 @@ class Blinky extends Ghost {
   }
 
   inChaseMode(pacman) {
-    console.log('chase!!!')
     this.targetTile = [...pacman.getPositionAsTile()];
     if (this.behaviour != "chase") {
       this.reverseDir();
@@ -35,7 +34,6 @@ class Blinky extends Ghost {
   }
 
   inScatterMode() {
-    console.log('scatter')
     this.behaviour = "scatter";
     this.targetTile = [...BLINKY_SCATTER_MODE_TARGET];
     if (this.behaviour != "scatter") {

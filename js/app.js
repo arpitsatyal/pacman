@@ -25,7 +25,7 @@ window.onload = function () {
       frame_aux.height
     );
 
-    //blinky
+    // //blinky
     frame_aux = game.tile_set.frames[game.blinky.frame_value];
     display.drawObject(
       assets_manager.tile_set_image,
@@ -94,6 +94,10 @@ window.onload = function () {
     if (!game.paused) {
       game.pacman.live(game, controller);
       game.blinky.live(game);
+      game.pinky.live(game);
+      game.inky.live(game);
+      // game.clyde.live(game);
+      game.manageGhostDeparture();
     }
   }
 

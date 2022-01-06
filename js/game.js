@@ -6,16 +6,15 @@ the logic of the game, in addition to containing all the objects of elements of 
 function Game(path_image) {
   this.world = new World(path_image);
   this.pacman = new Pacman(this.world);
+  this.blinky = new Blinky(this);
   this.pinky = new Pinky(this);
   this.clyde = new Clyde(this);
-  this.blinky = new Blinky(this);
   this.inky = new Inky(this);
   this.tile_set = new TileSet();
 
   this.paused = true;
   this.ready_notification = false;
 
-  this.time = 0; //elapsed game time in seconds
   this.frames_rendered = 0; //game cycles executed
   this.home_door = "close"; 
 
@@ -32,11 +31,8 @@ function Game(path_image) {
     }, TIME_DELTA);
   };
 
-  this.update = function (updateCallback, renderCallback) {
+  this.update = (updateCallback, renderCallback) => {
     if (!this.paused) this.frames_rendered++;
-    if (this.frames_rendered % FPS == 0 && !this.paused) {
-      this.time++;
-    }
     updateCallback();
     renderCallback();
   };
@@ -57,9 +53,39 @@ function Game(path_image) {
       this.ready_notification = false;
     }, seconds * 1000);
   };
-  this.closeHome = function () {
+
+  this.openHome = () => {
+    this.home_door = "open";
+    this.world.path.fillStyle = "#00fc1e";
+    this.world.path.fillRect(180, 127, 1, 30); 
+}
+
+
+  this.closeHome = () => {
     this.world.path.fillStyle = "#000000";
-    this.world.path.fillRect(180, 127, 1, 30); // close out
+    this.world.path.fillRect(180, 127, 1, 30); 
     this.home_door = "close";
   };
+
+  /*
+
+controls the output of different ghosts
+*/
+this.manageGhostDeparture = () => {
+  if(this.frames_rendered == 5*FPS && this.pinky.behaviour=="waiting")  //sale pinky
+  {
+      this.pinky.behaviour = "";
+      this.openHome();
+  }    
+  if(this.frames_rendered == 10*FPS && this.inky.behaviour=="waiting")  //sale inky
+  {
+      this.inky.behaviour = "";
+      this.openHome();
+  }   
+  if(this.frames_rendered == 15*FPS && this.clyde.behaviour=="waiting")  //sale clyde
+  {
+      this.clyde.behaviour = "";
+      this.openHome();
+  }    
+}
 }
