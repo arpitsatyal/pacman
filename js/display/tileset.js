@@ -1,5 +1,4 @@
 function TileSet() {
-
   /* Here we load each of the sprites as a frame*/
   this.frames = [
     /*0*/ new Frame(144, 71, 24, 24, 0, 0),
@@ -88,8 +87,7 @@ function TileSet() {
     /*77*/ new Frame(192, 0, 12, 12, 0, 0),
     /*78*/ new Frame(216, 0, 12, 12, 0, 0), //balls
 
-
-     /*79*/ new Frame(0, 216, 24, 24, 1, 1),
+    /*79*/ new Frame(0, 216, 24, 24, 1, 1),
     /*80*/ new Frame(24, 216, 24, 24, 1, 1), //right orange
     /*81*/ new Frame(48, 216, 24, 24, 1, 1),
     /*82*/ new Frame(72, 216, 24, 24, 1, 1), //orange down
@@ -134,5 +132,43 @@ function TileSet() {
     /*117*/ new Frame(336, 216, 24, 24, 0, 0),
     /*118*/ new Frame(360, 216, 24, 24, 0, 0), //eyes up
 
+    /*119*/ new Frame(144, 96, 24, 24, 0, 0),
+    /*120*/ new Frame(168, 96, 24, 24, 0, 0), //Framerightened gris
+    /*121*/ new Frame(192, 96, 24, 24, 0, 0),
+    /*122*/ new Frame(216, 96, 24, 24, 0, 0), //Framerightened azul
+
+    /*123*/ new Frame(96, 168, 24, 24, 0, 0),
+    /*124*/ new Frame(120, 168, 24, 24, 0, 0),
+    /*125*/ new Frame(144, 168, 24, 24, 0, 0),
+    /*126*/ new Frame(168, 168, 24, 24, 0, 0),
+    /*127*/ new Frame(192, 168, 24, 24, 0, 0),
+    /*128 */ new Frame(216, 168, 24, 24, 0, 0),
+    /*129*/ new Frame(240, 168, 24, 24, 0, 0),
+    /*130*/ new Frame(264, 168, 24, 24, 0, 0),
+    /*131*/ new Frame(312, 168, 24, 24, 0, 0),
+    /*132*/ new Frame(336, 168, 24, 24, 0, 0),
+    /*133*/ new Frame(360, 168, 24, 24, 0, 0), //secuencia pacman die
+    /*134*/ new Frame(192, 144, 24, 24, 0, 0), //200pts
+    /*135*/ new Frame(216, 144, 24, 24, 0, 0), //400pts
+    /*136*/ new Frame(240, 144, 24, 24, 0, 0), //800pts
+    /*137*/ new Frame(264, 144, 24, 24, 0, 0), //1600pts
+
+    /*138*/ new Frame(0, 120, 24, 24, 0, 0), //cereza
+    /*139*/ new Frame(24, 120, 24, 24, 0, 0), //Frameresa
+    /*140*/ new Frame(48, 120, 24, 24, 0, 0), //naranja
+    /*141*/ new Frame(72, 120, 24, 24, 0, 0), //campana
+    /*142*/ new Frame(96, 120, 24, 24, 0, 0), //manzana
+    /*143*/ new Frame(120, 120, 24, 24, 0, 0), //uvas
+    /*144*/ new Frame(148, 120, 24, 24, 0, 0), //galaxian boss
+    /*145*/ new Frame(172, 120, 24, 24, 0, 0), //llave
+
+    /*146*/ new Frame(288, 144, 24, 24, 0, 0), //100pts
+    /*147*/ new Frame(312, 144, 24, 24, 0, 0), //300pts
+    /*148*/ new Frame(336, 144, 24, 24, 0, 0), //500pts
+    /*149*/ new Frame(360, 144, 24, 24, 0, 0), //700pts
+    /*150*/ new Frame(288, 120, 24, 24, 0, 0), //1000pts
+    /*151*/ new Frame(312, 120, 24, 24, 0, 0), //2000pts
+    /*152*/ new Frame(336, 120, 24, 24, 0, 0), //3000pts
+    /*153*/ new Frame(360, 120, 24, 24, 0, 0), //5000pts
   ];
 }

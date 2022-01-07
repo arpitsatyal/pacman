@@ -40,10 +40,11 @@ function World(path_image){
         /*30*/  29,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,28,
         ]; //868
 
-    // 1: normal path
-    // 2: decision point
-    // 3: special decision point
-    // 4: home entrance
+    /* 1: normal path
+     2: decision point
+     3: special decision point
+     4: home entrance
+    */
     
     this.logical_map = [
         //       00,01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27

@@ -96,8 +96,9 @@ window.onload = function () {
       game.blinky.live(game);
       game.pinky.live(game);
       game.inky.live(game);
-      // game.clyde.live(game);
+      game.clyde.live(game);
       game.manageGhostDeparture();
+      game.checkPacmanGhostsCollision();
     }
   }
 

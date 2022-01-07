@@ -67,4 +67,11 @@ Returns the tile as an array of row coordinates, col
     let row = Math.floor(this.y / TILE_SIZE) + 1;
     return [row, col];
   }
+  die(game){
+    //death animation
+    this.dir = "";
+    this.next_dir = "";
+    this.changeFrameSet(this.frame_sets["die"], "loop" );
+    this.blocked = true;
+}
 }

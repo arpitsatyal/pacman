@@ -16,7 +16,10 @@ function Game(path_image) {
   this.ready_notification = false;
 
   this.frames_rendered = 0; //game cycles executed
-  this.home_door = "close"; 
+  this.home_door = "close";
+
+  this.is_reseting = false;
+  this.is_reseting_level = false;
 
   this.initialize = () => {
     this.wait(3);
@@ -57,13 +60,12 @@ function Game(path_image) {
   this.openHome = () => {
     this.home_door = "open";
     this.world.path.fillStyle = "#00fc1e";
-    this.world.path.fillRect(180, 127, 1, 30); 
-}
-
+    this.world.path.fillRect(180, 127, 1, 30);
+  };
 
   this.closeHome = () => {
     this.world.path.fillStyle = "#000000";
-    this.world.path.fillRect(180, 127, 1, 30); 
+    this.world.path.fillRect(180, 127, 1, 30);
     this.home_door = "close";
   };
 
@@ -71,21 +73,125 @@ function Game(path_image) {
 
 controls the output of different ghosts
 */
-this.manageGhostDeparture = () => {
-  if(this.frames_rendered == 5*FPS && this.pinky.behaviour=="waiting")  //sale pinky
-  {
+  this.manageGhostDeparture = () => {
+    if (this.frames_rendered == 5 * FPS && this.pinky.behaviour == "waiting") {
+      //sale pinky
       this.pinky.behaviour = "";
       this.openHome();
-  }    
-  if(this.frames_rendered == 10*FPS && this.inky.behaviour=="waiting")  //sale inky
-  {
+    }
+    if (this.frames_rendered == 10 * FPS && this.inky.behaviour == "waiting") {
+      //sale inky
       this.inky.behaviour = "";
       this.openHome();
-  }   
-  if(this.frames_rendered == 15*FPS && this.clyde.behaviour=="waiting")  //sale clyde
-  {
+    }
+    if (this.frames_rendered == 15 * FPS && this.clyde.behaviour == "waiting") {
+      //sale clyde
       this.clyde.behaviour = "";
       this.openHome();
-  }    
-}
+    }
+  };
+
+  /*
+recoloca los fantasmas y pacman
+*/
+  this.reset = () => {
+    this.pacman.x = PACMAN_INIT_POS[0];
+    this.pacman.y = PACMAN_INIT_POS[1];
+    this.pacman.dir = "right";
+
+    this.blinky.x = BLINKY_INIT_POS[0];
+    this.blinky.y = BLINKY_INIT_POS[1];
+    this.blinky.in_home = false;
+    this.blinky.behaviour = "";
+    this.blinky.mode = "loop";
+    this.blinky.speed = 1;
+
+    this.pacman.changeFrameSet(this.pacman.frame_sets["right"], "loop");
+    this.blinky.changeFrameSet(this.blinky.frame_sets["right"], "loop");
+    this.inky.changeFrameSet(this.inky.frame_sets["right"], "loop");
+    this.clyde.changeFrameSet(this.clyde.frame_sets["right"], "loop");
+    this.pacman.blocked = false;
+    this.is_reseting = false;
+  };
+
+  this.checkPacmanGhostsCollision = () => {
+    if (this.blinky.collides(this.pacman.x, this.pacman.y)) {
+      if (
+        this.blinky.behaviour != "frightened" &&
+        this.blinky.behaviour != "returning"
+      ) {
+        this.pacman.die(this);
+        if (!this.is_reseting) {
+          this.is_reseting = true;
+          setTimeout(this.reset, 1600);
+        }
+      } else {
+        if (his.blinky.behaviour != "returning") {
+          this.paused = true;
+        }
+        this.blinky.behaviour = "returning";
+        this.blinky.targetTile = [...HOME_ENTRANCE_TILE];
+      }
+    }
+    if (this.inky.collides(this.pacman.x, this.pacman.y)) {
+      if (
+        this.inky.behaviour != "frightened" &&
+        this.inky.behaviour != "returning"
+      ) {
+        this.pacman.die(this);
+        if (!this.is_reseting) {
+          this.is_reseting = true;
+          setTimeout(this.reset, 1600);
+        }
+      } else {
+        if (this.sound) {
+          this.sounds["eat_ghost"].play();
+          this.sounds["returning"].play();
+        }
+        if (this.inky.behaviour != "returning") {
+          this.paused = true;
+        }
+        this.inky.behaviour = "returning";
+        this.inky.targetTile = [...HOME_ENTRANCE_TILE];
+      }
+    }
+    if (this.clyde.collides(this.pacman.x, this.pacman.y)) {
+      if (
+        this.clyde.behaviour != "frightened" &&
+        this.clyde.behaviour != "returning"
+      ) {
+        this.pacman.die(this);
+        if (!this.is_reseting) {
+          this.is_reseting = true;
+          setTimeout(this.reset, 1600);
+        }
+      } else {
+        if (this.clyde.behaviour != "returning") {
+          this.paused = true;
+        }
+        this.clyde.behaviour = "returning";
+        this.clyde.speed_divisor = 1;
+        this.clyde.targetTile = [...HOME_ENTRANCE_TILE];
+      }
+    }
+    if (this.pinky.collides(this.pacman.x, this.pacman.y)) {
+      if (
+        this.pinky.behaviour != "frightened" &&
+        this.pinky.behaviour != "returning"
+      ) {
+        this.pacman.die(this);
+        if (!this.is_reseting) {
+          this.is_reseting = true;
+          setTimeout(this.reset, 1600);
+        }
+      } else {
+        if (this.pinky.behaviour != "returning") {
+          this.paused = true;
+        }
+        this.pinky.behaviour = "returning";
+        this.pinky.speed_divisor = 1;
+        this.pinky.targetTile = [...HOME_ENTRANCE_TILE];
+      }
+    }
+  };
 }

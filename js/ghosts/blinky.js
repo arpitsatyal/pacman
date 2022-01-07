@@ -25,6 +25,17 @@ class Blinky extends Ghost {
 
   }
 
+  getOutHome(){
+    this.makeSequence(["up"]);
+    if(this.y <= POS_CONSIDERED_OUT_HOME[1]) 
+    {
+        this.in_home = false;
+        this.game.closeHome();
+        this.current_sequence = [];
+        this.dir = "left";
+    }    
+}
+
   inChaseMode(pacman) {
     this.targetTile = [...pacman.getPositionAsTile()];
     if (this.behaviour != "chase") {
