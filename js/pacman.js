@@ -52,110 +52,39 @@ class Pacman extends Travel {
   }
 
   /*
-Consume una bola si existe en su posición y aumenta la puntuación en tal caso.
+Consume a ball if it exists in your position.
 */
   eatBall(game) {
-    let eated_ball = game.world.balls.setBall(this.x, this.y, 0);
+    let eated_ball = game.world.balls.setBall(this.x, this.y);
 
-    if (eated_ball == 1) {
-      game.world.balls.remaining--;
-    } else if (eated_ball == 2) {
-      game.world.balls.remaining--;
-      if (
-        game.blinky.behaviour != "waiting" &&
-        game.blinky.behaviour != "returning"
-      ) {
-        game.blinky.behaviour = "frightened";
-        game.blinky.changeFrameSet(
-          game.blinky.frame_sets["frightened"],
-          "loop"
-        );
-        if (!game.blinky.timeout)
-          game.blinky.timeout = setTimeout(() => {
-            if (game.blinky.behaviour == "frightened") {
-              game.blinky.behaviour = "";
-            }
-          }, FRIGHTENED_DURATION * 1000);
-        else {
-          clearTimeout(game.blinky.timeout);
-          game.blinky.timeout = setTimeout(() => {
-            if (game.blinky.behaviour == "frightened") {
-              game.blinky.behaviour = "";
-            }
-          }, FRIGHTENED_DURATION * 1000);
-        }
-      }
-      if (
-        game.inky.behaviour != "waiting" &&
-        game.inky.behaviour != "returning"
-      ) {
-        game.inky.behaviour = "frightened";
-
-        game.inky.changeFrameSet(game.inky.frame_sets["frightened"], "loop");
-        if (!game.inky.timeout)
-          game.inky.timeout = setTimeout(() => {
-            if (game.inky.behaviour == "frightened") {
-              game.inky.behaviour = "";
-            }
-          }, FRIGHTENED_DURATION * 1000);
-        else {
-          clearTimeout(game.inky.timeout);
-          game.inky.timeout = setTimeout(() => {
-            if (game.inky.behaviour == "frightened") {
-              game.inky.behaviour = "";
-            }
-          }, FRIGHTENED_DURATION * 1000);
-        }
-      }
-
-      if (
-        game.clyde.behaviour != "waiting" &&
-        game.clyde.behaviour != "returning"
-      ) {
-        game.clyde.behaviour = "frightened";
-
-        game.clyde.changeFrameSet(game.clyde.frame_sets["frightened"], "loop");
-        if (!game.clyde.timeout)
-          game.clyde.timeout = setTimeout(() => {
-            if (game.clyde.behaviour == "frightened") {
-              game.clyde.behaviour = "";
-            }
-          }, FRIGHTENED_DURATION * 1000);
-        else {
-          clearTimeout(game.clyde.timeout);
-          game.clyde.timeout = setTimeout(() => {
-            if (game.clyde.behaviour == "frightened") {
-              game.clyde.behaviour = "";
-            }
-          }, FRIGHTENED_DURATION * 1000);
-        }
-      }
-
-      if (
-        game.pinky.behaviour != "waiting" &&
-        game.pinky.behaviour != "returning"
-      ) {
-        game.pinky.behaviour = "frightened";
-
-        game.pinky.changeFrameSet(game.pinky.frame_sets["frightened"], "loop");
-        if (!game.pinky.timeout)
-          game.pinky.timeout = setTimeout(() => {
-            if (game.pinky.behaviour == "frightened") {
-              game.pinky.behaviour = "";
-            }
-          }, FRIGHTENED_DURATION * 1000);
-        else {
-          clearTimeout(game.pinky.timeout);
-          game.pinky.timeout = setTimeout(() => {
-            if (game.pinky.behaviour == "frightened") {
-              game.pinky.behaviour = "";
-            }
-          }, FRIGHTENED_DURATION * 1000);
-        }
-      }
+    if (eated_ball === 2) {
+      this.frightenedMode(game.blinky);
+      this.frightenedMode(game.pinky);
+      this.frightenedMode(game.inky);
+      this.frightenedMode(game.clyde);
     }
   }
 
+  frightenedMode(ghost) {
+    if (ghost.behaviour != "waiting" && ghost.behaviour != "returning") {
+      ghost.behaviour = "frightened";
+      ghost.changeFrameSet(ghost.frame_sets["frightened"], "loop");
+      if (!ghost.timeout)
+        ghost.timeout = setTimeout(() => {
+          if (ghost.behaviour == "frightened") {
+            ghost.behaviour = "";
+          }
+        }, FRIGHTENED_DURATION * 1000);
+      else {
+        clearTimeout(ghost.timeout);
+        ghost.timeout = setTimeout(() => {
+          if (ghost.behaviour == "frightened") {
+            ghost.behaviour = "";
+          }
+        }, FRIGHTENED_DURATION * 1000);
+      }
+    }
+  }
   /*
 
 Get the current position as a tile.

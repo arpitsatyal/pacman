@@ -173,7 +173,7 @@ Check if current position is a decision point
   }
 
   /*
-Comprueba si la posición actual es la entrada al home
+Check if the current position is the entrance to home plate
 */
   inHomeEntrance() {
     if (this.x == POS_CONSIDERED_OUT_HOME[0] && this.y >= 126 && this.y <= 157)

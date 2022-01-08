@@ -118,64 +118,22 @@ relocate the ghosts and pacman
   };
 
   checkPacmanGhostsCollision() {
-    if (this.blinky.collides(this.pacman.x, this.pacman.y)) {
-      if (
-        this.blinky.behaviour != "frightened" &&
-        this.blinky.behaviour != "returning"
-      ) {
+    this.returnToHome(this.blinky);
+    this.returnToHome(this.pinky);
+    this.returnToHome(this.inky);
+    this.returnToHome(this.clyde);
+  }
+  returnToHome(ghost) {
+    if (ghost.collides(this.pacman.x, this.pacman.y)) {
+      if (ghost.behaviour != "frightened" && ghost.behaviour != "returning") {
         this.pacman.die(this);
         if (!this.is_reseting) {
           this.is_reseting = true;
           setTimeout(this.reset, 1600);
         }
       } else {
-        this.blinky.behaviour = "returning";
-        this.blinky.targetTile = [...HOME_ENTRANCE_TILE];
-      }
-    }
-    if (this.inky.collides(this.pacman.x, this.pacman.y)) {
-      if (
-        this.inky.behaviour != "frightened" &&
-        this.inky.behaviour != "returning"
-      ) {
-        this.pacman.die(this);
-        if (!this.is_reseting) {
-          this.is_reseting = true;
-          setTimeout(this.reset, 1600);
-        }
-      } else {
-        this.inky.behaviour = "returning";
-        this.inky.targetTile = [...HOME_ENTRANCE_TILE];
-      }
-    }
-    if (this.clyde.collides(this.pacman.x, this.pacman.y)) {
-      if (
-        this.clyde.behaviour != "frightened" &&
-        this.clyde.behaviour != "returning"
-      ) {
-        this.pacman.die(this);
-        if (!this.is_reseting) {
-          this.is_reseting = true;
-          setTimeout(this.reset, 1600);
-        }
-      } else {
-        this.clyde.behaviour = "returning";
-        this.clyde.targetTile = [...HOME_ENTRANCE_TILE];
-      }
-    }
-    if (this.pinky.collides(this.pacman.x, this.pacman.y)) {
-      if (
-        this.pinky.behaviour != "frightened" &&
-        this.pinky.behaviour != "returning"
-      ) {
-        this.pacman.die(this);
-        if (!this.is_reseting) {
-          this.is_reseting = true;
-          setTimeout(this.reset, 1600);
-        }
-      } else {
-        this.pinky.behaviour = "returning";
-        this.pinky.targetTile = [...HOME_ENTRANCE_TILE];
+        ghost.behaviour = "returning";
+        ghost.targetTile = [...HOME_ENTRANCE_TILE];
       }
     }
   }

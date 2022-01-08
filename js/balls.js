@@ -42,21 +42,16 @@ class Balls{
         /*30*/   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     ];
     this.special_ball_animator = new Animator([78,76],10);
-    this.last_ball_accessed;
-    this.remaining = 258;
 
 }
     /* Assign a value to the ball at the given position in pixels and return the value that was there before */
-    setBall(x,y, value){
+    setBall(x,y){
     let col = Math.floor(x / TILE_SIZE) +1;
     let row = Math.floor(y / TILE_SIZE) +1;
-    if(this.last_ball_accessed != undefined && this.last_ball_accessed[0] == row && this.last_ball_accessed[1] == col){
-        return -1;
-    }
-    this.last_ball_accessed = [row,col];
+   
     let i = row * NCOLS + col;
     let aux = this.matrix[i];
-    this.matrix[i] = value;
+    this.matrix[i] = 0;
     return aux;
 }
 }
