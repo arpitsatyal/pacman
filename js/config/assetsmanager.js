@@ -1,16 +1,19 @@
 /* Class to manage all the assets */
 
-function AssetsManager() {
-  this.tile_set_image;
-  this.path_image;
-  this.game_over;
-  this.ready;
-  this.checkerboard;
-  this.count = 0;
-  let _all_loaded = new Event("all_loaded");
-  this.getEvent = () => _all_loaded;
+class AssetsManager {
+  constructor() {
+    this.tile_set_image;
+    this.path_image;
+    this.game_over;
+    this.ready;
+    this.checkerboard;
+    this.count = 0;
+    this._all_loaded = new Event("all_loaded");
+  }
 
-  this.loadImages = function (callback) {
+  getEvent = () => this._all_loaded;
+
+  loadImages(callback) {
     this.tile_set_image = new Image();
     this.path_image = new Image();
 
@@ -27,12 +30,9 @@ function AssetsManager() {
     const count = (event) => {
       this.count++;
       if (this.count == 5) dispatchEvent(event);
-    }
+    };
 
-    this.tile_set_image.addEventListener(
-      "load",
-      count(this.getEvent())
-    );
+    this.tile_set_image.addEventListener("load", count(this.getEvent()));
 
     this.path_image.addEventListener("load", count(this.getEvent()));
 
@@ -46,5 +46,5 @@ function AssetsManager() {
     this.game_over.addEventListener("load", count(this.getEvent()));
 
     addEventListener("all_loaded", () => callback());
-  };
+  }
 }

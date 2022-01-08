@@ -5,7 +5,8 @@ The matrix represents a board of tiles of size TILE_SIZE.
     1 ==> normal ball
     2 ==> special ball
 */
-function Balls(){
+class Balls{
+    constructor() {
     this.matrix = [
             //  00,01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
         /*00*/   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -43,9 +44,9 @@ function Balls(){
     this.special_ball_animator = new Animator([78,76],10);
     this.last_ball_accessed;
 
-    
+}
     /* Assign a value to the ball at the given position in pixels and return the value that was there before */
-    this.setBall = function(x,y, value){
+    setBall(x,y, value){
     let col = Math.floor(x / TILE_SIZE) +1;
     let row = Math.floor(y / TILE_SIZE) +1;
     if(this.last_ball_accessed != undefined && this.last_ball_accessed[0] == row && this.last_ball_accessed[1] == col){

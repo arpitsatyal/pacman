@@ -34,21 +34,21 @@ class Pacman extends Travel {
 
   /* React to keystrokes */
   reaction2Keys(controller) {
-    if (controller.left.active && this.checkNextPosition("left"))
+    if (controller.left && this.checkNextPosition("left"))
       this.dir = "left";
-    else if (controller.left.active) {
+    else if (controller.left) {
       this.next_dir = "left";
-    } else if (controller.right.active && this.checkNextPosition("right"))
+    } else if (controller.right && this.checkNextPosition("right"))
       this.dir = "right";
-    else if (controller.right.active) {
+    else if (controller.right) {
       this.next_dir = "right";
-    } else if (controller.up.active && this.checkNextPosition("up"))
+    } else if (controller.up && this.checkNextPosition("up"))
       this.dir = "up";
-    else if (controller.up.active) {
+    else if (controller.up) {
       this.next_dir = "up";
-    } else if (controller.down.active && this.checkNextPosition("down"))
+    } else if (controller.down && this.checkNextPosition("down"))
       this.dir = "down";
-    else if (controller.down.active) {
+    else if (controller.down) {
       this.next_dir = "down";
     }
   }

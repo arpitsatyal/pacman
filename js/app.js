@@ -120,10 +120,10 @@ window.onload = function () {
   window.addEventListener("resize", resize);
   window.addEventListener(
     "keydown",
-    controller.handleKeyDownUp.bind(controller)
+    controller.keyPressed
   );
   
-  window.addEventListener("keyup", controller.handleKeyDownUp.bind(controller));
+  window.addEventListener("keyup", controller.keyPressed);
 
   assets_manager.loadImages(() => {
     game = new Game(assets_manager.path_image);

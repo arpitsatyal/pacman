@@ -3,45 +3,47 @@ Game Object, which controls the main draw and draw loop
 the logic of the game, in addition to containing all the objects of elements of the game (pacman, ghosts, walls, etc)
 */
 
-function Game(path_image) {
-  this.world = new World(path_image);
-  this.pacman = new Pacman(this.world);
-  this.blinky = new Blinky(this);
-  this.pinky = new Pinky(this);
-  this.clyde = new Clyde(this);
-  this.inky = new Inky(this);
-  this.tile_set = new TileSet();
+class Game {
+  constructor(path_image) {
+    this.world = new World(path_image);
+    this.pacman = new Pacman(this.world);
+    this.blinky = new Blinky(this);
+    this.pinky = new Pinky(this);
+    this.clyde = new Clyde(this);
+    this.inky = new Inky(this);
+    this.tile_set = new TileSet();
 
-  this.paused = true;
-  this.ready_notification = false;
+    this.paused = true;
+    this.ready_notification = false;
 
-  this.frames_rendered = 0; //game cycles executed
-  this.home_door = "close";
+    this.frames_rendered = 0; //game cycles executed
+    this.home_door = "close";
 
-  this.is_reseting = false;
-  this.is_reseting_level = false;
+    this.is_reseting = false;
+    this.is_reseting_level = false;
+  }
 
-  this.initialize = () => {
+  initialize(){
     this.wait(3);
     this.closeHome();
     this.showReadyNotification(3);
   };
 
   /* The game loop */
-  this.start = (updateCallback, renderCallback) => {
+  start(updateCallback, renderCallback){
     setInterval(() => {
       this.update(updateCallback, renderCallback);
     }, TIME_DELTA);
   };
 
-  this.update = (updateCallback, renderCallback) => {
+  update(updateCallback, renderCallback){
     if (!this.paused) this.frames_rendered++;
     updateCallback();
     renderCallback();
   };
 
   /* Wait seconds */
-  this.wait = (seconds) => {
+  wait = (seconds) => {
     this.paused = true;
     setTimeout(() => {
       this.paused = false;
@@ -49,7 +51,7 @@ function Game(path_image) {
   };
 
   /* Show ready sign for x seconds. */
-  this.showReadyNotification = (seconds) => {
+  showReadyNotification = (seconds) => {
     this.ready_notification = true;
     if (seconds == -1) return;
     setTimeout(() => {
@@ -57,13 +59,13 @@ function Game(path_image) {
     }, seconds * 1000);
   };
 
-  this.openHome = () => {
+  openHome(){
     this.home_door = "open";
     this.world.path.fillStyle = "#00fc1e";
     this.world.path.fillRect(180, 127, 1, 30);
   };
 
-  this.closeHome = () => {
+  closeHome(){
     this.world.path.fillStyle = "#000000";
     this.world.path.fillRect(180, 127, 1, 30);
     this.home_door = "close";
@@ -73,7 +75,7 @@ function Game(path_image) {
 
 controls the output of different ghosts
 */
-  this.manageGhostDeparture = () => {
+  manageGhostDeparture(){
     if (this.frames_rendered == 5 * FPS && this.pinky.behaviour == "waiting") {
       //sale pinky
       this.pinky.behaviour = "";
@@ -92,9 +94,10 @@ controls the output of different ghosts
   };
 
   /*
-recoloca los fantasmas y pacman
+
+relocate the ghosts and pacman
 */
-  this.reset = () => {
+  reset = () => {
     this.pacman.x = PACMAN_INIT_POS[0];
     this.pacman.y = PACMAN_INIT_POS[1];
     this.pacman.dir = "right";
@@ -114,7 +117,7 @@ recoloca los fantasmas y pacman
     this.is_reseting = false;
   };
 
-  this.checkPacmanGhostsCollision = () => {
+  checkPacmanGhostsCollision(){
     if (this.blinky.collides(this.pacman.x, this.pacman.y)) {
       if (
         this.blinky.behaviour != "frightened" &&

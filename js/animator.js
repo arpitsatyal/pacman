@@ -28,4 +28,3 @@ this.changeFrameSet = function (
   this.mode = mode;
 };
 }
-

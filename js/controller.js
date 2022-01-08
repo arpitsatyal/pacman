@@ -1,39 +1,29 @@
 /*
-Class that manages the game controls, contains a button object for each key that
-manages.
+Class that manages the game controls such as key press.
 */
-function Controller() {
-  this.down = new Controller.ButtonInput();
-  this.left = new Controller.ButtonInput();
-  this.right = new Controller.ButtonInput();
-  this.up = new Controller.ButtonInput();
-
-  this.handleKeyDownUp = function (event) {
-    let down;
-    if (event.type == "keydown") down = true;
-    else down = false;
-
+class Controller {
+  constructor() {
+    this.pressed = false;
+    this.down;
+    this.left;
+    this.right;
+    this.up;   
+  }
+  keyPressed = (event) => {
+    event.type === 'keydown' ? this.pressed = true : this.pressed = false;
     switch (event.keyCode) {
       case 37:
-        this.left.getInput(down);
+        this.left = this.pressed;
         break;
       case 38:
-        this.up.getInput(down);
+        this.up = this.pressed;
         break;
       case 39:
-        this.right.getInput(down);
+        this.right = this.pressed;
         break;
       case 40:
-        this.down.getInput(down);
+        this.down = this.pressed;
         break;
     }
-  };
+  }
 }
-
-Controller.ButtonInput = function () {
-  this.active = false;
-};
-
-Controller.ButtonInput.prototype.getInput = function (down) {
-  if (this.active != down) this.active = down;
-};

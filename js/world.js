@@ -84,7 +84,7 @@ function World(path_image){
   
     this.balls = new Balls();
     
-    this.path = document.createElement("canvas").getContext("2d"); 
+    this.path = document.querySelector('#path').getContext('2d');
     this.path.canvas.width = path_image.width;
     this.path.canvas.height = path_image.height;
     this.path.drawImage(path_image,0,0, path_image.width, path_image.height);

@@ -12,6 +12,10 @@ body{
     background: black;
     text-align:center;
 }
+header {
+    width: 100%;
+    display: flex;
+}
 
 #main{
     max-width: 75vh;
@@ -19,7 +23,14 @@ body{
 }
 
 #score{
-    float: left;
+    font-size: 2em;
+    padding: 30px;
+    color: white;
+    text-align: left;
+    width: 50%;
+}
+
+#highScore{
     font-size: 2em;
     padding: 30px;
     color: white;
@@ -29,11 +40,10 @@ body{
 
 #canvas{
     display: inline;
-    
     text-align:center;
     margin: 10px;
 }
 
-
-
-
+#path {
+    display: none;
+}

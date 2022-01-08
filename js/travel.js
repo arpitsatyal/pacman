@@ -26,6 +26,7 @@ We check if we can move to the indicated position
     } else if (dir === "down") {
       next_y += this.speed;
     }
+
     let pixel = this.path.getImageData(
       next_x + offset_x,
       next_y + offset_y,
