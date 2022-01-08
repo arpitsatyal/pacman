@@ -61,50 +61,8 @@ Check if the tile contains a special decision point
     return false;
   }
 
-  /*
-We check if we can move to the indicated position or, failing that, we are testing with smaller displacements.
-Returns the number of pixels that was finally able to move.
-Returns 0 if it cannot scroll.
-*/
-  checkNextPositionTry(dir) {
-    let offset_x = 24; //an offset to match canvas grids for map and canvas for path
-    let offset_y = 0;
-    let speed_to_try = this.speed; // we test with the largest possible displacement first
-
-    while (speed_to_try > 0) {
-      let next_x = this.x;
-      let next_y = this.y;
-
-      if (dir == "left") {
-        next_x -= speed_to_try;
-      } else if (dir == "right") {
-        next_x += speed_to_try;
-      } else if (dir == "up") {
-        next_y -= speed_to_try;
-      } else if (dir == "down") {
-        next_y += speed_to_try;
-      }
-
-      let pixel = this.path.getImageData(
-        next_x + offset_x,
-        next_y + offset_y,
-        1,
-        1
-      );
-      if (
-        pixel.data[0] == PATH_COLOR_R &&
-        pixel.data[1] == PATH_COLOR_G &&
-        pixel.data[2] == PATH_COLOR_B
-      ) {
-        return speed_to_try;
-      }
-      speed_to_try--;
-    }
-    return 0;
-  }
-
   moveLeft() {
-    let can = this.checkNextPositionTry("left");
+    let can = this.checkNextPosition("left");
     if (can > 0) {
       this.x -= can;
       if (this.behaviour != "frightened" && this.behaviour != "returning")
@@ -118,7 +76,7 @@ Returns 0 if it cannot scroll.
   }
 
   moveRight() {
-    let can = this.checkNextPositionTry("right");
+    let can = this.checkNextPosition("right");
     if (can > 0) {
       this.x += can;
       if (this.behaviour != "frightened" && this.behaviour != "returning")
@@ -132,7 +90,7 @@ Returns 0 if it cannot scroll.
   }
 
   moveUp() {
-    let can = this.checkNextPositionTry("up");
+    let can = this.checkNextPosition("up");
     if (can > 0) {
       this.y -= can;
       if (this.behaviour != "frightened" && this.behaviour != "returning")
@@ -143,7 +101,7 @@ Returns 0 if it cannot scroll.
   }
 
   moveDown() {
-    let can = this.checkNextPositionTry("down");
+    let can = this.checkNextPosition("down");
     if (can > 0) {
       this.y += can;
       if (this.behaviour != "frightened" && this.behaviour != "returning")

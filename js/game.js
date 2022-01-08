@@ -1,5 +1,5 @@
 /*
-Game Object, which controls the main draw and draw loop
+Game class, which controls the main draw and draw loop
 the logic of the game, in addition to containing all the objects of elements of the game (pacman, ghosts, walls, etc)
 */
 
@@ -21,9 +21,14 @@ class Game {
 
     this.is_reseting = false;
     this.is_reseting_level = false;
+
+    this.score = 0;
+    this.highScore = 0;
+    this.points_per_ghost = 20;
   }
 
   initialize() {
+    this.highestScore();
     this.wait(3);
     this.closeHome();
     this.showReadyNotification(3);
@@ -123,6 +128,7 @@ relocate the ghosts and pacman
     this.returnToHome(this.inky);
     this.returnToHome(this.clyde);
   }
+
   returnToHome(ghost) {
     if (ghost.collides(this.pacman.x, this.pacman.y)) {
       if (ghost.behaviour != "frightened" && ghost.behaviour != "returning") {
@@ -132,9 +138,25 @@ relocate the ghosts and pacman
           setTimeout(this.reset, 1600);
         }
       } else {
+        this.incScore(this.points_per_ghost);
         ghost.behaviour = "returning";
         ghost.targetTile = [...HOME_ENTRANCE_TILE];
       }
     }
+  }
+
+  incScore(value) {
+    this.score += value;
+    const elem = document.getElementById("curScore");
+    if(this.score > this.highScore) localStorage.setItem('highestScore', this.score);
+    elem.innerHTML = this.score;
+  }
+
+  highestScore() {
+    localStorage.getItem('highestScore') ?
+     this.highScore = localStorage.getItem('highestScore') :
+     this.highScore = 0;
+     const elem = document.getElementById('highest');
+     elem.innerHTML = this.highScore;
   }
 }

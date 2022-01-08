@@ -1,7 +1,3 @@
-/**
-
-This class should not be used independently but inheriting from it
- */
 class Ghost extends Travel {
   constructor(world) {
     super(world);
@@ -50,7 +46,7 @@ Change the mode of the ghosts according to the wave that corresponds to the elap
     //wave 1
     if (game.frames_rendered >= 1 && game.frames_rendered <= 7 * FPS)
       this.inScatterMode(game.pacman);
-    else if (game.frames_rendered > 7 * FPS && game.frames_rendered < 27 * FPS)
+    else if (game.frames_rendered > 7 * FPS)
       this.inChaseMode(game.pacman);
   }
 
@@ -114,8 +110,8 @@ Function that changes direction between up and down continuously each time it co
 inside home. While you wait.
 */
   rebound() {
-    let can_up = this.checkNextPositionTry("up");
-    let can_down = this.checkNextPositionTry("down");
+    let can_up = this.checkNextPosition("up");
+    let can_down = this.checkNextPosition("down");
     if (can_up && this.dir != "down") {
       this.dir = "up";
     } else if (can_up && this.dir == "up") {
@@ -144,7 +140,6 @@ Returns up, down, left or right;
       dirs.push("left");
     if (this.isValidPoint([pos[0], pos[1] + 1]) && this.dir != "left")
       dirs.push("right");
-    //here we will have selected two addresses
     return dirs[random_index];
   }
 
@@ -224,9 +219,9 @@ We use it in behavior mode change.
       else if (this.dir == "right") return "right";
     }
 
-    //no vale volver por donde venia
+    //it is not worth going back the way you came
     if (this.isValidPoint([pos[0] - 1, pos[1]]) && this.dir != "down")
-      distances.push({ dir: "up", value: this.distanceFromAdjacentTile("up") });
+      distances.push({ dir: "up", value: this.distanceFromAdjacentTile("up") }); //mathi bata ko shortest distance
     if (this.isValidPoint([pos[0] + 1, pos[1]]) && this.dir != "up")
       distances.push({
         dir: "down",
@@ -242,7 +237,6 @@ We use it in behavior mode change.
         dir: "right",
         value: this.distanceFromAdjacentTile("right"),
       });
-
     distances.sort((a, b) => {
       if (a.value == b.value) {
         //at equal distance it is chosen in the following order: up> left> down
@@ -263,7 +257,6 @@ Distance in a straight line from an adjacent tile ("up", "down", "left" or "righ
 from the current position to the targetTile.
 */
   distanceFromAdjacentTile(adj) {
-    let res = 0;
     let pos = this.getPositionAsTile();
     switch (adj) {
       case "up":
@@ -279,51 +272,27 @@ from the current position to the targetTile.
         pos[1]++;
         break;
     }
-
-    res = this.distanceFromTile2Tile(pos, this.targetTile);
-    return res;
+    return this.distanceFromTile2Tile(pos, this.targetTile);
   }
 
   /*
 Distance in px from tile A to another tile B. Using Pythagoras theorem.
 */
-  distanceFromTile2Tile(a, b) {
-    return Math.sqrt(Math.pow(b[0] - a[0], 2) + Math.pow(b[1] - a[1], 2));
-  }
+  distanceFromTile2Tile = (a, b) =>
+    Math.sqrt(Math.pow(b[0] - a[0], 2) + Math.pow(b[1] - a[1], 2));
 
   valueInRange(value, min, max) {
     return value >= min && value <= max;
   }
-  /**
-It receives the top-left coordinate of a rectangle with which we are going to intersect.
- Both rectangles (the ghost one and the pacman one are of COLLISION_SIZE size)
- */
+ 
   collides(pacmanX, pacmanY) {
-    //we calculate the collision rectangles centered within the sprite rectangles.
-    let offset = SPRITE_SIZE / 2 - COLLISION_SIZE / 2;
 
     let xOverlap =
-      this.valueInRange(
-        pacmanX + offset,
-        this.x + offset,
-        this.x + offset + COLLISION_SIZE
-      ) ||
-      this.valueInRange(
-        this.x + offset,
-        pacmanX + offset,
-        pacmanX + offset + COLLISION_SIZE
-      );
+      this.valueInRange(pacmanX, this.x, this.x + SPRITE_SIZE) ||
+      this.valueInRange(this.x, pacmanX, pacmanX + SPRITE_SIZE);
     let yOverlap =
-      this.valueInRange(
-        pacmanY + offset,
-        this.y + offset,
-        this.y + offset + COLLISION_SIZE
-      ) ||
-      this.valueInRange(
-        this.y + offset,
-        pacmanY + offset,
-        pacmanY + offset + COLLISION_SIZE
-      );
+      this.valueInRange(pacmanY, this.y, this.y + SPRITE_SIZE) ||
+      this.valueInRange(this.y, pacmanY, pacmanY + SPRITE_SIZE);
 
     return xOverlap && yOverlap;
   }

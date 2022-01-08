@@ -92,6 +92,7 @@ window.onload = function () {
 
   function update() {
     if (!game.paused) {
+      game.highestScore();
       game.pacman.live(game, controller);
       game.blinky.live(game);
       game.pinky.live(game);

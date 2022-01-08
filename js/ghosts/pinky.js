@@ -22,19 +22,18 @@ class Pinky extends Ghost {
   }
 
   getOutHome() {
-    // this.makeSequence(["up"]);
+    this.makeSequence(["up"]);
     if (this.y <= POS_CONSIDERED_OUT_HOME[1]) {
       //if we have completed the sequence
       this.in_home = false;
       this.game.closeHome();
       this.speed = 1;
-      // this.current_sequence = [];
+      this.current_sequence = [];
       this.dir = "left";
     }
   }
 
   inChaseMode(pacman) {
-    // console.log('ponyk chase')
     // its target is placed 4 tiles ahead of pacman
     this.targetTile = [...pacman.getPositionAsTile()];
     if (pacman.dir == "up") {
@@ -57,7 +56,6 @@ class Pinky extends Ghost {
   }
 
   inScatterMode() {
-    // console.log('pinky scttr')
     this.behaviour = "scatter";
     this.targetTile = [...PINKY_SCATTER_MODE_TARGET];
     if (this.behaviour != "scatter") {

@@ -33,6 +33,9 @@ const POS_CONSIDERED_OUT_HOME = [156,126];
 const POS_CONSIDERED_IN_HOME = [156,157];
 const HOME_ENTRANCE_TILE= [11,13];
 
+const BALL_1_SCORE = 5;
+const BALL_2_SCORE = 10;
+
 //SPRITES
 const ASSETS_SPRITES = "assets/spritemap.png";
 const ASSETS_PATH = "assets/path.png";

@@ -56,8 +56,13 @@ Consume a ball if it exists in your position.
 */
   eatBall(game) {
     let eated_ball = game.world.balls.setBall(this.x, this.y);
-
-    if (eated_ball === 2) {
+    if(eated_ball == 1){ //bola normal vale 10pts
+      game.incScore(BALL_1_SCORE);
+      game.world.balls.remaining--;
+    
+  } else if (eated_ball === 2) {
+    game.incScore(BALL_2_SCORE);
+    game.world.balls.remaining--;
       this.frightenedMode(game.blinky);
       this.frightenedMode(game.pinky);
       this.frightenedMode(game.inky);
@@ -77,11 +82,6 @@ Consume a ball if it exists in your position.
         }, FRIGHTENED_DURATION * 1000);
       else {
         clearTimeout(ghost.timeout);
-        ghost.timeout = setTimeout(() => {
-          if (ghost.behaviour == "frightened") {
-            ghost.behaviour = "";
-          }
-        }, FRIGHTENED_DURATION * 1000);
       }
     }
   }

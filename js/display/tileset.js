@@ -92,7 +92,7 @@ function TileSet() {
     /*81*/ new Frame(48, 216, 24, 24, 1, 1),
     /*82*/ new Frame(72, 216, 24, 24, 1, 1), //orange down
     /*83*/ new Frame(96, 216, 24, 24, 1, 1),
-    /*84*/ new Frame(120, 216, 24, 24, 1, 1), //leFramet orange
+    /*84*/ new Frame(120, 216, 24, 24, 1, 1), //left orange
     /*85*/ new Frame(144, 216, 24, 24, 1, 1),
     /*86*/ new Frame(168, 216, 24, 24, 1, 1), //orange up
 
@@ -101,7 +101,7 @@ function TileSet() {
     /*89*/ new Frame(48, 192, 24, 24, 1, 1),
     /*90*/ new Frame(72, 192, 24, 24, 1, 1), //pink down
     /*91*/ new Frame(96, 192, 24, 24, 1, 1),
-    /*92*/ new Frame(120, 192, 24, 24, 1, 1), //leFramet rose
+    /*92*/ new Frame(120, 192, 24, 24, 1, 1), //left rose
     /*93*/ new Frame(144, 192, 24, 24, 1, 1),
     /*94*/ new Frame(168, 192, 24, 24, 1, 1), //pink top
 
@@ -110,7 +110,7 @@ function TileSet() {
     /*97*/ new Frame(48, 144, 24, 24, 1, 1),
     /*98*/ new Frame(72, 144, 24, 24, 1, 1), //red down
     /*99*/ new Frame(96, 144, 24, 24, 1, 1),
-    /*100*/ new Frame(120, 144, 24, 24, 1, 1), //red leFramet
+    /*100*/ new Frame(120, 144, 24, 24, 1, 1), //red left
     /*101*/ new Frame(144, 144, 24, 24, 1, 1),
     /*102*/ new Frame(168, 144, 24, 24, 1, 1), //red top
 
@@ -119,7 +119,7 @@ function TileSet() {
     /*105*/ new Frame(240, 192, 24, 24, 1, 1),
     /*106*/ new Frame(264, 192, 24, 24, 1, 1), //blue down
     /*107*/ new Frame(288, 192, 24, 24, 1, 1),
-    /*108*/ new Frame(312, 192, 24, 24, 1, 1), //blue leFramet
+    /*108*/ new Frame(312, 192, 24, 24, 1, 1), //blue left
     /*109*/ new Frame(336, 192, 24, 24, 1, 1),
     /*110*/ new Frame(360, 192, 24, 24, 1, 1), //blue up
 
@@ -128,14 +128,14 @@ function TileSet() {
     /*113*/ new Frame(240, 216, 24, 24, 0, 0),
     /*114*/ new Frame(264, 216, 24, 24, 0, 0), //eyes down
     /*115*/ new Frame(288, 216, 24, 24, 0, 0),
-    /*116*/ new Frame(312, 216, 24, 24, 0, 0), //eyes leFramet
+    /*116*/ new Frame(312, 216, 24, 24, 0, 0), //eyes left
     /*117*/ new Frame(336, 216, 24, 24, 0, 0),
     /*118*/ new Frame(360, 216, 24, 24, 0, 0), //eyes up
 
     /*119*/ new Frame(144, 96, 24, 24, 0, 0),
-    /*120*/ new Frame(168, 96, 24, 24, 0, 0), //Framerightened gris
+    /*120*/ new Frame(168, 96, 24, 24, 0, 0), //frightened gray
     /*121*/ new Frame(192, 96, 24, 24, 0, 0),
-    /*122*/ new Frame(216, 96, 24, 24, 0, 0), //Framerightened azul
+    /*122*/ new Frame(216, 96, 24, 24, 0, 0), //frightened blue
 
     /*123*/ new Frame(96, 168, 24, 24, 0, 0),
     /*124*/ new Frame(120, 168, 24, 24, 0, 0),
@@ -147,28 +147,10 @@ function TileSet() {
     /*130*/ new Frame(264, 168, 24, 24, 0, 0),
     /*131*/ new Frame(312, 168, 24, 24, 0, 0),
     /*132*/ new Frame(336, 168, 24, 24, 0, 0),
-    /*133*/ new Frame(360, 168, 24, 24, 0, 0), //secuencia pacman die
-    /*134*/ new Frame(192, 144, 24, 24, 0, 0), //200pts
-    /*135*/ new Frame(216, 144, 24, 24, 0, 0), //400pts
-    /*136*/ new Frame(240, 144, 24, 24, 0, 0), //800pts
-    /*137*/ new Frame(264, 144, 24, 24, 0, 0), //1600pts
-
-    /*138*/ new Frame(0, 120, 24, 24, 0, 0), //cereza
-    /*139*/ new Frame(24, 120, 24, 24, 0, 0), //Frameresa
-    /*140*/ new Frame(48, 120, 24, 24, 0, 0), //naranja
-    /*141*/ new Frame(72, 120, 24, 24, 0, 0), //campana
-    /*142*/ new Frame(96, 120, 24, 24, 0, 0), //manzana
-    /*143*/ new Frame(120, 120, 24, 24, 0, 0), //uvas
-    /*144*/ new Frame(148, 120, 24, 24, 0, 0), //galaxian boss
-    /*145*/ new Frame(172, 120, 24, 24, 0, 0), //llave
-
-    /*146*/ new Frame(288, 144, 24, 24, 0, 0), //100pts
-    /*147*/ new Frame(312, 144, 24, 24, 0, 0), //300pts
-    /*148*/ new Frame(336, 144, 24, 24, 0, 0), //500pts
-    /*149*/ new Frame(360, 144, 24, 24, 0, 0), //700pts
-    /*150*/ new Frame(288, 120, 24, 24, 0, 0), //1000pts
-    /*151*/ new Frame(312, 120, 24, 24, 0, 0), //2000pts
-    /*152*/ new Frame(336, 120, 24, 24, 0, 0), //3000pts
-    /*153*/ new Frame(360, 120, 24, 24, 0, 0), //5000pts
+    /*133*/ new Frame(360, 168, 24, 24, 0, 0), //pacman die
+    /*134*/ new Frame(192, 144, 24, 24, 0, 0), 
+    /*135*/ new Frame(216, 144, 24, 24, 0, 0), 
+    /*136*/ new Frame(240, 144, 24, 24, 0, 0), 
+    /*137*/ new Frame(264, 144, 24, 24, 0, 0)
   ];
 }

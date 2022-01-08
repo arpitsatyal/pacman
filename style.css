@@ -27,7 +27,7 @@ header {
     padding: 30px;
     color: white;
     text-align: left;
-    width: 50%;
+    width: 40%;
 }
 
 #highScore{
@@ -35,7 +35,7 @@ header {
     padding: 30px;
     color: white;
     text-align: left;
-    width: 50%;
+    width: 60%;
 }
 
 #canvas{
