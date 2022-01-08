@@ -28,6 +28,11 @@ Performs all the actions of its life cycle
     )
       this.applyBehaviourWaves(game);
 
+    if (this.inHomeEntrance() && this.behaviour == "returning") {
+      this.dir = "left";
+      this.behaviour = "";
+    }
+
     this.changeDir();
     this.move();
 
@@ -163,6 +168,15 @@ Check if current position is a decision point
       this.logical_map[tile[0] * NCOLS + tile[1]] == 2 ||
       this.logical_map[tile[0] * NCOLS + tile[1]] == 3
     )
+      return true;
+    return false;
+  }
+
+  /*
+Comprueba si la posición actual es la entrada al home
+*/
+  inHomeEntrance() {
+    if (this.x == POS_CONSIDERED_OUT_HOME[0] && this.y >= 126 && this.y <= 157)
       return true;
     return false;
   }

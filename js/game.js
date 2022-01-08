@@ -23,24 +23,24 @@ class Game {
     this.is_reseting_level = false;
   }
 
-  initialize(){
+  initialize() {
     this.wait(3);
     this.closeHome();
     this.showReadyNotification(3);
-  };
+  }
 
   /* The game loop */
-  start(updateCallback, renderCallback){
+  start(updateCallback, renderCallback) {
     setInterval(() => {
       this.update(updateCallback, renderCallback);
     }, TIME_DELTA);
-  };
+  }
 
-  update(updateCallback, renderCallback){
+  update(updateCallback, renderCallback) {
     if (!this.paused) this.frames_rendered++;
     updateCallback();
     renderCallback();
-  };
+  }
 
   /* Wait seconds */
   wait = (seconds) => {
@@ -59,23 +59,23 @@ class Game {
     }, seconds * 1000);
   };
 
-  openHome(){
+  openHome() {
     this.home_door = "open";
     this.world.path.fillStyle = "#00fc1e";
     this.world.path.fillRect(180, 127, 1, 30);
-  };
+  }
 
-  closeHome(){
+  closeHome() {
     this.world.path.fillStyle = "#000000";
     this.world.path.fillRect(180, 127, 1, 30);
     this.home_door = "close";
-  };
+  }
 
   /*
 
 controls the output of different ghosts
 */
-  manageGhostDeparture(){
+  manageGhostDeparture() {
     if (this.frames_rendered == 5 * FPS && this.pinky.behaviour == "waiting") {
       //sale pinky
       this.pinky.behaviour = "";
@@ -91,7 +91,7 @@ controls the output of different ghosts
       this.clyde.behaviour = "";
       this.openHome();
     }
-  };
+  }
 
   /*
 
@@ -117,7 +117,7 @@ relocate the ghosts and pacman
     this.is_reseting = false;
   };
 
-  checkPacmanGhostsCollision(){
+  checkPacmanGhostsCollision() {
     if (this.blinky.collides(this.pacman.x, this.pacman.y)) {
       if (
         this.blinky.behaviour != "frightened" &&
@@ -129,9 +129,6 @@ relocate the ghosts and pacman
           setTimeout(this.reset, 1600);
         }
       } else {
-        if (his.blinky.behaviour != "returning") {
-          this.paused = true;
-        }
         this.blinky.behaviour = "returning";
         this.blinky.targetTile = [...HOME_ENTRANCE_TILE];
       }
@@ -147,13 +144,6 @@ relocate the ghosts and pacman
           setTimeout(this.reset, 1600);
         }
       } else {
-        if (this.sound) {
-          this.sounds["eat_ghost"].play();
-          this.sounds["returning"].play();
-        }
-        if (this.inky.behaviour != "returning") {
-          this.paused = true;
-        }
         this.inky.behaviour = "returning";
         this.inky.targetTile = [...HOME_ENTRANCE_TILE];
       }
@@ -169,11 +159,7 @@ relocate the ghosts and pacman
           setTimeout(this.reset, 1600);
         }
       } else {
-        if (this.clyde.behaviour != "returning") {
-          this.paused = true;
-        }
         this.clyde.behaviour = "returning";
-        this.clyde.speed_divisor = 1;
         this.clyde.targetTile = [...HOME_ENTRANCE_TILE];
       }
     }
@@ -188,13 +174,9 @@ relocate the ghosts and pacman
           setTimeout(this.reset, 1600);
         }
       } else {
-        if (this.pinky.behaviour != "returning") {
-          this.paused = true;
-        }
         this.pinky.behaviour = "returning";
-        this.pinky.speed_divisor = 1;
         this.pinky.targetTile = [...HOME_ENTRANCE_TILE];
       }
     }
-  };
+  }
 }

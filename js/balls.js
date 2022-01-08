@@ -43,6 +43,7 @@ class Balls{
     ];
     this.special_ball_animator = new Animator([78,76],10);
     this.last_ball_accessed;
+    this.remaining = 258;
 
 }
     /* Assign a value to the ball at the given position in pixels and return the value that was there before */
