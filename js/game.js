@@ -15,8 +15,9 @@ class Game {
 
     this.paused = true;
     this.ready_notification = false;
+    this.game_over_notification = false;
 
-    this.frames_rendered = 0; //game cycles executed
+    this.frames_rendered = 0; 
     this.home_door = "close";
 
     this.is_reseting = false;
@@ -33,6 +34,7 @@ class Game {
   initialize() {
     this.play();
     this.pause();
+    this.restart();
     this.highestScore();
     this.closeHome();
   }
@@ -40,9 +42,12 @@ class Game {
   play() {
     const btn = document.getElementById("play");
     btn.onclick = () => {
+      btn.innerHTML = 'Playing...'
+      document.getElementById("pause").innerHTML = 'Pause';
       this.paused = false;
-      if(this.world.balls.remaining >= 258) {
-      this.preloadAudios().then((data) => data["music"].play());
+      if (this.world.balls.remaining >= 258) {
+        this.preloadAudios();
+        this.sounds["music"].play();
         this.wait(4);
         this.showReadyNotification(3);
       }
@@ -52,14 +57,33 @@ class Game {
   pause() {
     const btn = document.getElementById("pause");
     btn.onclick = () => {
+      btn.innerHTML = 'Paused...'
+      document.getElementById("play").innerHTML = 'Play';
       this.paused = true;
-      this.sounds["eat_ball"].pause();
-      this.sounds["eat_ghost"].pause();
-      this.sounds["frightened"].pause();
-      this.sounds["music"].pause();
-      this.sounds["returning"].pause();
-      this.sounds["die"].pause();
-    }
+      this.setPause();
+    };
+  }
+
+  setPause() {
+    this.sounds["eat_ball"].pause();
+    this.sounds["eat_ghost"].pause();
+    this.sounds["frightened"].pause();
+    this.sounds["music"].pause();
+    this.sounds["returning"].pause();
+    this.sounds["die"].pause();
+  }
+
+  restart() {
+    this.score = 0;
+    const btn = document.getElementById("restart");
+    btn.onclick = () => {
+      this.reset();
+      this.world.balls.matrix = [...this.world.balls.matrix_copy];
+      this.world.balls.remaining = 258;
+      this.setPause();
+      this.preloadAudios();
+      this.sounds["music"].play();
+    };
   }
 
   /* The game loop */
@@ -87,10 +111,14 @@ class Game {
   showReadyNotification = (seconds) => {
     this.ready_notification = true;
     if (seconds == -1) return;
-    setTimeout(() => {
-      this.ready_notification = false;
-    }, seconds * 1000);
+    setTimeout(() => this.ready_notification = false, seconds * 1000);
   };
+
+  showGameOverNotification(seconds) {
+    this.ready_notification = true;
+    if(seconds == -1) return;
+    setTimeout(() => this.game_over_notification = false, seconds*1000);
+}
 
   openHome() {
     this.home_door = "open";
@@ -164,20 +192,49 @@ relocate the ghosts and pacman
     this.blinky.mode = "loop";
     this.blinky.speed = 1;
 
+    this.inky.x = INKY_INIT_POS[0];
+    this.inky.y = INKY_INIT_POS[1];
+    this.inky.in_home = true;
+    this.inky.behaviour = "waiting";
+    this.inky.mode = "loop";
+    this.inky.speed = 1;
+    this.inky.dir = "";
+    this.inky.next_dir = "";
+
+    this.clyde.x = CLYDE_INIT_POS[0];
+    this.clyde.y = CLYDE_INIT_POS[1];
+    this.clyde.in_home = true;
+    this.clyde.behaviour = "waiting";
+    this.clyde.mode = "loop";
+    this.clyde.speed = 1;
+    this.clyde.dir = "";
+    this.clyde.next_dir = "";
+
+    this.pinky.x = PINKY_INIT_POS[0];
+    this.pinky.y = PINKY_INIT_POS[1];
+    this.pinky.in_home = true;
+    this.pinky.behaviour = "waiting";
+    this.pinky.mode = "loop";
+    this.pinky.speed = 1;
+    this.pinky.dir = "";
+    this.pinky.next_dir = "";
+
+    this.wait(3);
+    this.showReadyNotification(3);
+
+    this.frames_rendered = 0;
+    this.closeHome();
     this.pacman.changeFrameSet(this.pacman.frame_sets["right"], "loop");
     this.blinky.changeFrameSet(this.blinky.frame_sets["right"], "loop");
     this.inky.changeFrameSet(this.inky.frame_sets["right"], "loop");
     this.clyde.changeFrameSet(this.clyde.frame_sets["right"], "loop");
-
     this.pacman.blocked = false;
     this.is_reseting = false;
   };
 
   checkPacmanGhostsCollision() {
-    this.returnToHome(this.blinky);
-    this.returnToHome(this.pinky);
-    this.returnToHome(this.inky);
-    this.returnToHome(this.clyde);
+    const ghosts = ['blinky', 'pinky', 'inky', 'clyde'];
+    ghosts.forEach(ghost => this.returnToHome(this[ghost]));
   }
 
   returnToHome(ghost) {
@@ -217,15 +274,12 @@ relocate the ghosts and pacman
   }
 
   preloadAudios() {
-    return new Promise((resolve) => {
-      this.sounds["music"] = this.createAudioTag("music", false);
-      this.sounds["eat_ball"] = this.createAudioTag("eat_ball", false);
-      this.sounds["eat_ghost"] = this.createAudioTag("eat_ghost", false);
-      this.sounds["frightened"] = this.createAudioTag("frightened", false);
-      this.sounds["returning"] = this.createAudioTag("returning", true);
-      this.sounds["die"] = this.createAudioTag("die", false);
-      resolve(this.sounds);
-    });
+    this.sounds["music"] = this.createAudioTag("music", false);
+    this.sounds["eat_ball"] = this.createAudioTag("eat_ball", false);
+    this.sounds["eat_ghost"] = this.createAudioTag("eat_ghost", false);
+    this.sounds["frightened"] = this.createAudioTag("frightened", false);
+    this.sounds["returning"] = this.createAudioTag("returning", true);
+    this.sounds["die"] = this.createAudioTag("die", false);
   }
 
   createAudioTag(sound, loop) {
@@ -239,21 +293,13 @@ relocate the ghosts and pacman
 
   toggleSound = () => {
     let sound_button = document.getElementById("volume");
-    if(this.sound){
-        this.sound = false;
-        sound_button.style.backgroundImage = "url('assets/sound_off.png')";
-        this.sounds["eat_ball"].pause();
-        this.sounds["eat_ghost"].pause();
-        this.sounds["frightened"].pause();
-        this.sounds["music"].pause();
-        this.sounds["returning"].pause();
-        this.sounds["die"].pause();
+    if (this.sound) {
+      this.sound = false;
+      sound_button.style.backgroundImage = "url('assets/sound_off.png')";
+      this.setPause();
+    } else {
+      this.sound = true;
+      sound_button.style.backgroundImage = "url('assets/sound_on.png')";
     }
-        
-    else{
-        this.sound = true;
-        sound_button.style.backgroundImage = "url('assets/sound_on.png')";
-    }
-        
-}
+  };
 }

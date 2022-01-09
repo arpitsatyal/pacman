@@ -1,4 +1,5 @@
 class Blinky extends Ghost {
+  
   constructor(game) {
     super(game.world);
     this.x = BLINKY_INIT_POS[0];

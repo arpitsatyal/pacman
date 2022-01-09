@@ -85,6 +85,15 @@ window.onload = function () {
         READY_HEIGHT
       );
     }
+  
+    //game over 
+    if(game.game_over_notification){
+      display.drawObject(assets_manager.game_over,
+          0, 0,
+          GAMEOVER_X,
+          GAMEOVER_Y,
+          GAMEOVER_WIDTH, GAMEOVER_HEIGHT);
+  }
 
     display.render();
     //dump the buffer to the final canvas

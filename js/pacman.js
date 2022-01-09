@@ -55,38 +55,51 @@ class Pacman extends Travel {
 Consume a ball if it exists in your position.
 */
   eatBall(game) {
+    if(game.world.balls.remaining === 0) {
+      game.game_over_notification = true;
+      game.paused = true;
+    };
     let eated_ball = game.world.balls.setBall(this.x, this.y);
     if(eated_ball === 1){ 
+    if(game.sound) game.sounds["eat_ball"].play();   
       game.incScore(BALL_1_SCORE);
       game.world.balls.remaining--;
     
   } else if (eated_ball === 2) {
+    if(game.sound) game.sounds["eat_ball"].play();   
     game.incScore(BALL_2_SCORE);
     game.world.balls.remaining--;
-      this.frightenedMode(game.blinky, game);
-      this.frightenedMode(game.pinky, game);
-      this.frightenedMode(game.inky, game);
-      this.frightenedMode(game.clyde, game);
+      this.frightenedMode(game);
     }
   }
 
-  frightenedMode(ghost, game) {
-    if (ghost.behaviour != "waiting" && ghost.behaviour != "returning") {
-      ghost.behaviour = "frightened";
-      if(game.sound) game.sounds["frightened"].play();
-      ghost.changeFrameSet(ghost.frame_sets["frightened"], "loop");
-      if (!ghost.timeout)
-        ghost.timeout = setTimeout(() => {
-          if (ghost.behaviour == "frightened") {
-            ghost.behaviour = "";
-            game.sounds["frightened"].pause();
-          }
-        }, FRIGHTENED_DURATION * 1000);
-      else {
-        clearTimeout(ghost.timeout);
+  frightenedMode(game) {
+    const ghosts = ['blinky', 'pinky', 'inky', 'clyde'];
+    ghosts.forEach(ghost => {
+      if (game[ghost].behaviour != "waiting" && game[ghost].behaviour != "returning") {
+        game[ghost].behaviour = "frightened";
+        if(game.sound) game.sounds["frightened"].play();
+        game[ghost].changeFrameSet(game[ghost].frame_sets["frightened"], "loop");
+        if (!game[ghost].timeout)
+          game[ghost].timeout = setTimeout(() => {
+            if (game[ghost].behaviour == "frightened") {
+              game[ghost].behaviour = "";
+              game.sounds["frightened"].pause();
+            }
+          }, FRIGHTENED_DURATION * 1000);
+        else {
+          clearTimeout(game[ghost].timeout);
+          game[ghost].timeout = setTimeout(() => {
+            if(game[ghost].behaviour == "frightened"){
+                game[ghost].behaviour = "";
+                game.sounds["frightened"].pause();
+            }
+        },FRIGHTENED_DURATION*1000);
+        }
       }
-    }
+    })
   }
+  
   /*
 
 Get the current position as a tile.

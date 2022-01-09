@@ -41,6 +41,7 @@ class Balls{
         /*29*/   0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
         /*30*/   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     ];
+    this.matrix_copy = [...this.matrix];
     this.remaining = 258;
     this.special_ball_animator = new Animator([78,76],10);
 

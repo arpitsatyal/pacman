@@ -14,7 +14,7 @@ const NROWS = SCREEN_HEIGHT / TILE_SIZE; //(31)
 const PATH_COLOR_R = 0;
 const PATH_COLOR_G = 252;
 const PATH_COLOR_B = 30;
-const FRIGHTENED_DURATION = 10; 
+const FRIGHTENED_DURATION = 7; 
 
 //POSITIONS
 const PACMAN_INIT_POS = [156, 270];
@@ -46,6 +46,11 @@ const READY_WIDTH = 47;
 const READY_HEIGHT = 7;
 const READY_X = 145;
 const READY_Y = 206;
+
+const GAMEOVER_WIDTH = 79;
+const GAMEOVER_HEIGHT =  7;
+const GAMEOVER_X = 128;
+const GAMEOVER_Y = 206;
 
 // SOUNDS
 const SOUND_EAT_BALL = "assets/sounds/eat_ball.mp3";
