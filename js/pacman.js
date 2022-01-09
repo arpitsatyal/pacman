@@ -56,28 +56,30 @@ Consume a ball if it exists in your position.
 */
   eatBall(game) {
     let eated_ball = game.world.balls.setBall(this.x, this.y);
-    if(eated_ball == 1){ //bola normal vale 10pts
+    if(eated_ball === 1){ 
       game.incScore(BALL_1_SCORE);
       game.world.balls.remaining--;
     
   } else if (eated_ball === 2) {
     game.incScore(BALL_2_SCORE);
     game.world.balls.remaining--;
-      this.frightenedMode(game.blinky);
-      this.frightenedMode(game.pinky);
-      this.frightenedMode(game.inky);
-      this.frightenedMode(game.clyde);
+      this.frightenedMode(game.blinky, game);
+      this.frightenedMode(game.pinky, game);
+      this.frightenedMode(game.inky, game);
+      this.frightenedMode(game.clyde, game);
     }
   }
 
-  frightenedMode(ghost) {
+  frightenedMode(ghost, game) {
     if (ghost.behaviour != "waiting" && ghost.behaviour != "returning") {
       ghost.behaviour = "frightened";
+      if(game.sound) game.sounds["frightened"].play();
       ghost.changeFrameSet(ghost.frame_sets["frightened"], "loop");
       if (!ghost.timeout)
         ghost.timeout = setTimeout(() => {
           if (ghost.behaviour == "frightened") {
             ghost.behaviour = "";
+            game.sounds["frightened"].pause();
           }
         }, FRIGHTENED_DURATION * 1000);
       else {
@@ -101,5 +103,6 @@ Returns the tile as an array of row coordinates, col
     this.next_dir = "";
     this.changeFrameSet(this.frame_sets["die"], "loop");
     this.blocked = true;
+    if(game.sound) game.sounds["die"].play();
   }
 }

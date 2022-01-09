@@ -7,10 +7,10 @@ class Controller {
     this.down;
     this.left;
     this.right;
-    this.up;   
+    this.up;
   }
   keyPressed = (event) => {
-    event.type === 'keydown' ? this.pressed = true : this.pressed = false;
+    event.type === "keydown" ? (this.pressed = true) : (this.pressed = false);
     switch (event.keyCode) {
       case 37:
         this.left = this.pressed;
@@ -25,5 +25,5 @@ class Controller {
         this.down = this.pressed;
         break;
     }
-  }
+  };
 }

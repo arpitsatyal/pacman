@@ -16,14 +16,13 @@ const PATH_COLOR_G = 252;
 const PATH_COLOR_B = 30;
 const FRIGHTENED_DURATION = 10; 
 
-//INITIAL POSITIONS
+//POSITIONS
 const PACMAN_INIT_POS = [156, 270];
 const BLINKY_INIT_POS = [156, 126];
 const INKY_INIT_POS = [132, 167];
 const PINKY_INIT_POS = [156, 159];
 const CLYDE_INIT_POS = [180, 163];
 
-//POSITIONS FOR DISPERSION
 const BLINKY_SCATTER_MODE_TARGET = [0,23];
 const INKY_SCATTER_MODE_TARGET = [30,27];
 const PINKY_SCATTER_MODE_TARGET = [0,4];
@@ -47,3 +46,10 @@ const READY_WIDTH = 47;
 const READY_HEIGHT = 7;
 const READY_X = 145;
 const READY_Y = 206;
+
+// SOUNDS
+const SOUND_EAT_BALL = "assets/sounds/eat_ball.mp3";
+const SOUND_EAT_GHOST = "assets/sounds/eat_ghost.mp3";
+const SOUND_FRIGHTENED = "assets/sounds/frightened.mp3";
+const SOUND_MUSIC = "assets/sounds/music.mp3";
+const SOUND_RETURNING = "assets/sounds/returning.mp3";

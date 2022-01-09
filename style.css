@@ -23,19 +23,19 @@ header {
 }
 
 #score{
-    font-size: 2em;
+    font-size: 1em;
     padding: 30px;
     color: white;
     text-align: left;
-    width: 40%;
+    width: 30%;
 }
 
 #highScore{
-    font-size: 2em;
+    font-size: 1em;
     padding: 30px;
     color: white;
     text-align: left;
-    width: 60%;
+    width: 50%;
 }
 
 #canvas{
@@ -46,4 +46,44 @@ header {
 
 #path {
     display: none;
+}
+#volume {
+    float: right;
+    margin-top: 20px;
+    background-image: url('assets/sound_on.png');
+    background-repeat: no-repeat;
+    background-size: 48px 48px;
+    width: 20%;
+    height: 48px;
+}
+
+button {
+  background-color: #EA4C89;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-1:hover,
+.button-1:focus {
+  background-color: #F082AC;
 }

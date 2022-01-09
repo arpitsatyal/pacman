@@ -19,8 +19,8 @@ window.onload = function () {
       assets_manager.tile_set_image,
       frame_aux.x,
       frame_aux.y,
-      game.pacman.x + frame_aux.offset_x,
-      game.pacman.y + frame_aux.offset_y,
+      game.pacman.x + 1,
+      game.pacman.y + 1,
       frame_aux.width,
       frame_aux.height
     );
@@ -31,8 +31,8 @@ window.onload = function () {
       assets_manager.tile_set_image,
       frame_aux.x,
       frame_aux.y,
-      game.blinky.x + frame_aux.offset_x,
-      game.blinky.y + frame_aux.offset_y,
+      game.blinky.x + 1,
+      game.blinky.y + 1,
       frame_aux.width,
       frame_aux.height
     );
@@ -43,8 +43,8 @@ window.onload = function () {
       assets_manager.tile_set_image,
       frame_aux.x,
       frame_aux.y,
-      game.inky.x + frame_aux.offset_x,
-      game.inky.y + frame_aux.offset_y,
+      game.inky.x + 1,
+      game.inky.y + 1,
       frame_aux.width,
       frame_aux.height
     );
@@ -55,8 +55,8 @@ window.onload = function () {
       assets_manager.tile_set_image,
       frame_aux.x,
       frame_aux.y,
-      game.clyde.x + frame_aux.offset_x,
-      game.clyde.y + frame_aux.offset_y,
+      game.clyde.x + 1,
+      game.clyde.y + 1,
       frame_aux.width,
       frame_aux.height
     );
@@ -67,8 +67,8 @@ window.onload = function () {
       assets_manager.tile_set_image,
       frame_aux.x,
       frame_aux.y,
-      game.pinky.x + frame_aux.offset_x,
-      game.pinky.y + frame_aux.offset_y,
+      game.pinky.x + 1,
+      game.pinky.y + 1,
       frame_aux.width,
       frame_aux.height
     );
@@ -100,6 +100,7 @@ window.onload = function () {
       game.clyde.live(game);
       game.manageGhostDeparture();
       game.checkPacmanGhostsCollision();
+      game.manageGhostSounds();
     }
   }
 
@@ -119,15 +120,14 @@ window.onload = function () {
   let game;
 
   window.addEventListener("resize", resize);
-  window.addEventListener(
-    "keydown",
-    controller.keyPressed
-  );
-  
+  window.addEventListener("keydown", controller.keyPressed);
+
   window.addEventListener("keyup", controller.keyPressed);
 
   assets_manager.loadImages(() => {
     game = new Game(assets_manager.path_image);
+    let sound_button = document.getElementById("volume");
+    sound_button.addEventListener("click", game.toggleSound);
     resize();
     game.initialize();
     game.start(update, render);
