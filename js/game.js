@@ -25,15 +25,14 @@ class Game {
 
     this.score = 0;
     this.highScore = 0;
-    this.points_per_ghost = 20;
 
     this.sound = true;
     this.sounds = [];
+    this.count = 0;
   }
 
   initialize() {
     this.play();
-    this.pause();
     this.restart();
     this.highestScore();
     this.closeHome();
@@ -42,25 +41,21 @@ class Game {
   play() {
     const btn = document.getElementById("play");
     btn.onclick = () => {
-      btn.innerHTML = "Playing...";
-      document.getElementById("pause").innerHTML = "Pause";
-      this.paused = false;
-      if (this.world.balls.remaining >= 258) {
-        this.preloadAudios();
-        this.sounds["music"].play();
-        this.wait(4);
-        this.showReadyNotification(3);
+      this.count += 1;
+      if (this.count % 2 !== 0) {
+        btn.innerHTML = "Pause";
+        this.paused = false;
+        if (this.world.balls.remaining >= 258) {
+          this.preloadAudios();
+          this.sounds["music"].play();
+          this.wait(4);
+          this.showReadyNotification(3);
+        }
+      } else {
+        btn.innerHTML = "Resume Play";
+        this.paused = true;
+        this.setPause();
       }
-    };
-  }
-
-  pause() {
-    const btn = document.getElementById("pause");
-    btn.onclick = () => {
-      btn.innerHTML = "Paused...";
-      document.getElementById("play").innerHTML = "Play";
-      this.paused = true;
-      this.setPause();
     };
   }
 
@@ -76,7 +71,7 @@ class Game {
   restart() {
     const btn = document.getElementById("restart");
     btn.onclick = () => {
-    this.score = 0;
+      this.score = 0;
       this.setPause();
       this.preloadAudios();
       this.sounds["music"].play();
@@ -84,6 +79,12 @@ class Game {
       this.game_over_notification = false;
       this.world.balls.matrix = [...this.world.balls.matrix_copy];
       this.world.balls.remaining = 258;
+
+      this.pacman.changeFrameSet(this.pacman.frame_sets["up"], "loop");
+      this.blinky.changeFrameSet(this.blinky.frame_sets["up"], "loop");
+      this.pinky.changeFrameSet(this.pinky.frame_sets["up"], "loop");
+      this.inky.changeFrameSet(this.inky.frame_sets["up"], "loop");
+      this.clyde.changeFrameSet(this.clyde.frame_sets["up"], "loop");
     };
   }
 
@@ -221,10 +222,13 @@ relocate the ghosts and pacman
 
     this.frames_rendered = 0;
     this.closeHome();
+    
     this.pacman.changeFrameSet(this.pacman.frame_sets["right"], "loop");
     this.blinky.changeFrameSet(this.blinky.frame_sets["right"], "loop");
+    this.pinky.changeFrameSet(this.pinky.frame_sets["right"], "loop");
     this.inky.changeFrameSet(this.inky.frame_sets["right"], "loop");
     this.clyde.changeFrameSet(this.clyde.frame_sets["right"], "loop");
+
     this.pacman.blocked = false;
     this.is_reseting = false;
   };
@@ -247,7 +251,7 @@ relocate the ghosts and pacman
           this.sounds["eat_ghost"].play();
           this.sounds["returning"].play();
         }
-        this.incScore(this.points_per_ghost);
+        this.incScore(POINTS_PER_GHOST);
         ghost.behaviour = "returning";
         ghost.targetTile = [...HOME_ENTRANCE_TILE];
       }

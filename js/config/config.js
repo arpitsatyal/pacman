@@ -8,7 +8,6 @@ const SCREEN_HEIGHT = 372;
 const BACKGROUND_COLOR = "rgba(0,0,0,1)";
 const TILE_SIZE = 12;
 const SPRITE_SIZE = 24;
-const COLLISION_SIZE = 15;
 const NCOLS = SCREEN_WIDTH / TILE_SIZE; //(28)
 const NROWS = SCREEN_HEIGHT / TILE_SIZE; //(31)
 const PATH_COLOR_R = 0;
@@ -34,6 +33,7 @@ const HOME_ENTRANCE_TILE= [11,13];
 
 const BALL_1_SCORE = 5;
 const BALL_2_SCORE = 10;
+const POINTS_PER_GHOST = 20;
 
 //SPRITES
 const ASSETS_SPRITES = "assets/spritemap.png";

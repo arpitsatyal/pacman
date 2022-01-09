@@ -306,11 +306,12 @@ Distance in px from tile A to another tile B. Using Pythagoras theorem.
   collides(pacmanX, pacmanY) {
 
     let xOverlap =
-      this.valueInRange(pacmanX, this.x, this.x + SPRITE_SIZE) ||
-      this.valueInRange(this.x, pacmanX, pacmanX + SPRITE_SIZE);
+      this.valueInRange(pacmanX + 20, this.x + 20, this.x + 35) ||
+      this.valueInRange(this.x + 20, pacmanX + 20, pacmanX + 35);
+      
     let yOverlap =
-      this.valueInRange(pacmanY, this.y, this.y + SPRITE_SIZE) ||
-      this.valueInRange(this.y, pacmanY, pacmanY + SPRITE_SIZE);
+      this.valueInRange(pacmanY + 20, this.y + 20, this.y + 35) ||
+      this.valueInRange(this.y + 20, pacmanY + 20, pacmanY + 35);
 
     return xOverlap && yOverlap;
   }

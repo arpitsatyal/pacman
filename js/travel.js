@@ -13,10 +13,9 @@ class Travel {
 We check if we can move to the indicated position
 */
   checkNextPosition(dir) {
-    let next_x = this.x;
+    let next_x = this.x + 24;
     let next_y = this.y;
-    let offset_x = 24; //an offset to match canvas grids for map and canvas for path
-    let offset_y = 0;
+
     if (dir == "left") {
       next_x -= this.speed;
     } else if (dir === "right") {
@@ -27,12 +26,7 @@ We check if we can move to the indicated position
       next_y += this.speed;
     }
 
-    let pixel = this.path.getImageData(
-      next_x + offset_x,
-      next_y + offset_y,
-      1,
-      1
-    ); //+1 is because the position starts at 0 and the function starts at 1
+    let pixel = this.path.getImageData(next_x, next_y, 1, 1); 
     if (
       pixel.data[0] === PATH_COLOR_R &&
       pixel.data[1] === PATH_COLOR_G &&
