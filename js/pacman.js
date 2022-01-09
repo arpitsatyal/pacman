@@ -13,7 +13,7 @@ class Pacman extends Travel {
       down: [6, 7],
       die: [123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133],
     };
-    Animator.call(this, this.frame_sets["right"], 10);
+    Animator.call(this, this.frame_sets["right"]);
   }
 
   /* Performs all the actions of its life cycle  */

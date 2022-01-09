@@ -44,10 +44,28 @@ Change the mode of the ghosts according to the wave that corresponds to the elap
 */
   applyBehaviourWaves(game) {
     //wave 1
-    if (game.frames_rendered >= 1 && game.frames_rendered <= 7 * FPS)
-      this.inScatterMode(game.pacman);
-    else if (game.frames_rendered > 7 * FPS)
-      this.inChaseMode(game.pacman);
+    if(game.frames_rendered >= 1 && game.frames_rendered <= 7*FPS) 
+            this.inScatterMode(game.pacman);
+        else if(game.frames_rendered > 7*FPS && game.frames_rendered < 27*FPS) 
+            this.inChaseMode(game.pacman);
+
+        //wave 2
+        else if(game.frames_rendered >= 27*FPS && game.frames_rendered < 32*FPS) 
+            this.inScatterMode(game.pacman);
+        else if(game.frames_rendered > 32*FPS && game.frames_rendered < 52*FPS) 
+            this.inChaseMode(game.pacman);
+
+        //wave 3
+        else if(game.frames_rendered >= 52*FPS && game.frames_rendered < 58*FPS) 
+            this.inScatterMode(game.pacman);
+        else if(game.frames_rendered > 58*FPS && game.frames_rendered < 78*FPS) 
+            this.inChaseMode(game.pacman);
+
+        //wave 4
+        else if(game.frames_rendered >= 78*FPS && game.frames_rendered < 84*FPS) 
+            this.inScatterMode(game.pacman);
+        else if(game.frames_rendered > 84*FPS) 
+            this.inChaseMode(game.pacman);
   }
 
   /**

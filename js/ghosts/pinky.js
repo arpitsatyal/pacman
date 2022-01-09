@@ -18,7 +18,7 @@ class Pinky extends Ghost {
       returning_left: [115, 116],
       returning_up: [117, 118],
     };
-    Animator.call(this, this.frame_sets["up"], 10);
+    Animator.call(this, this.frame_sets["up"]);
   }
 
   getOutHome() {

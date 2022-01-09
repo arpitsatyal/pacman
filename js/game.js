@@ -17,7 +17,7 @@ class Game {
     this.ready_notification = false;
     this.game_over_notification = false;
 
-    this.frames_rendered = 0; 
+    this.frames_rendered = 0;
     this.home_door = "close";
 
     this.is_reseting = false;
@@ -42,8 +42,8 @@ class Game {
   play() {
     const btn = document.getElementById("play");
     btn.onclick = () => {
-      btn.innerHTML = 'Playing...'
-      document.getElementById("pause").innerHTML = 'Pause';
+      btn.innerHTML = "Playing...";
+      document.getElementById("pause").innerHTML = "Pause";
       this.paused = false;
       if (this.world.balls.remaining >= 258) {
         this.preloadAudios();
@@ -57,8 +57,8 @@ class Game {
   pause() {
     const btn = document.getElementById("pause");
     btn.onclick = () => {
-      btn.innerHTML = 'Paused...'
-      document.getElementById("play").innerHTML = 'Play';
+      btn.innerHTML = "Paused...";
+      document.getElementById("play").innerHTML = "Play";
       this.paused = true;
       this.setPause();
     };
@@ -74,23 +74,22 @@ class Game {
   }
 
   restart() {
-    this.score = 0;
     const btn = document.getElementById("restart");
     btn.onclick = () => {
-      this.reset();
-      this.world.balls.matrix = [...this.world.balls.matrix_copy];
-      this.world.balls.remaining = 258;
+    this.score = 0;
       this.setPause();
       this.preloadAudios();
       this.sounds["music"].play();
+      this.reset();
+      this.game_over_notification = false;
+      this.world.balls.matrix = [...this.world.balls.matrix_copy];
+      this.world.balls.remaining = 258;
     };
   }
 
   /* The game loop */
   start(updateCallback, renderCallback) {
-    setInterval(() => {
-      this.update(updateCallback, renderCallback);
-    }, TIME_DELTA);
+    setInterval(() => this.update(updateCallback, renderCallback), TIME_DELTA);
   }
 
   update(updateCallback, renderCallback) {
@@ -102,23 +101,21 @@ class Game {
   /* Wait seconds */
   wait = (seconds) => {
     this.paused = true;
-    setTimeout(() => {
-      this.paused = false;
-    }, seconds * 1000);
+    setTimeout(() => (this.paused = false), seconds * 1000);
   };
 
   /* Show ready sign for x seconds. */
   showReadyNotification = (seconds) => {
     this.ready_notification = true;
     if (seconds == -1) return;
-    setTimeout(() => this.ready_notification = false, seconds * 1000);
+    setTimeout(() => (this.ready_notification = false), seconds * 1000);
   };
 
   showGameOverNotification(seconds) {
     this.ready_notification = true;
-    if(seconds == -1) return;
-    setTimeout(() => this.game_over_notification = false, seconds*1000);
-}
+    if (seconds == -1) return;
+    setTimeout(() => (this.game_over_notification = false), seconds * 1000);
+  }
 
   openHome() {
     this.home_door = "open";
@@ -233,8 +230,8 @@ relocate the ghosts and pacman
   };
 
   checkPacmanGhostsCollision() {
-    const ghosts = ['blinky', 'pinky', 'inky', 'clyde'];
-    ghosts.forEach(ghost => this.returnToHome(this[ghost]));
+    const ghosts = ["blinky", "pinky", "inky", "clyde"];
+    ghosts.forEach((ghost) => this.returnToHome(this[ghost]));
   }
 
   returnToHome(ghost) {

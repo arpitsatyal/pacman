@@ -130,7 +130,6 @@ window.onload = function () {
 
   window.addEventListener("resize", resize);
   window.addEventListener("keydown", controller.keyPressed);
-
   window.addEventListener("keyup", controller.keyPressed);
 
   assets_manager.loadImages(() => {
