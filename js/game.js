@@ -42,6 +42,11 @@ class Game {
   play() {
     const btn = document.getElementById("play");
     btn.onclick = () => {
+      document.getElementById("game_start").style.display = 'none';
+      document.getElementById("canvas").style.display = "block";
+      document.getElementById("volume").style.display = "block";
+      document.getElementById("restart").style.display = "block";
+      document.getElementById("scores").style.display = "flex";
       this.count += 1;
       if (this.count % 2 !== 0) {
         btn.innerHTML = "Pause";

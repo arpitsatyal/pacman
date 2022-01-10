@@ -13,7 +13,7 @@ body{
     color: white;
     text-align:center;
 }
-header {
+#scores {
     width: 100%;
     display: flex;
 }
@@ -45,9 +45,6 @@ header {
     margin: 10px;
 }
 
-#path {
-    display: none;
-}
 #volume {
     float: right;
     background-image: url('assets/sound_on.png');
@@ -89,4 +86,10 @@ button:focus {
     color: white;
     text-align: left;
     width: 30%;
+}
+#canvas, #scores, #volume, #restart, #path {
+    display: none;
+}
+#game_start {
+    margin: 100px 100px 50px 250px;
 }

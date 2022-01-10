@@ -31,8 +31,12 @@
     <script src="js/app.js"></script>
   </head>
   <body>
+    <div id="game_start">
+      <img src="assets/Pacman Menu.jpg" alt="game_logo">
+        <img src="assets/instructions.png" alt="instructions">
+      </div>
     <div id="main">
-      <header>
+      <header id="scores">
         <div id="score">Score: <span id="curScore">0</span></div>
         <div id="highScore">High Score: <span id="highest">0</span></div>
         <div id="level">Level: <span id="curLevel">1</span></div>
@@ -43,7 +47,6 @@
         <button id="restart">Restart</button>
         <div id="volume"></div>
       </div>
-
       <canvas id="canvas"></canvas>
       <canvas id="path"></canvas>
     </div>
