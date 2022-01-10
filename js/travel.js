@@ -1,6 +1,5 @@
-/*
-Class for objects that move with in the path
-*/
+/* Class for objects that move within the path */
+
 class Travel {
   constructor(world) {
     this.next_dir = ""; // desired address
@@ -8,10 +7,9 @@ class Travel {
     this.path = world.path;
     this.logical_map = world.logical_map;
   }
-  /*
 
-We check if we can move to the indicated position
-*/
+  /* We check if we can move to the indicated position */
+  
   checkNextPosition(dir) {
     let next_x = this.x + 24;
     let next_y = this.y;
@@ -26,7 +24,7 @@ We check if we can move to the indicated position
       next_y += this.speed;
     }
 
-    let pixel = this.path.getImageData(next_x, next_y, 1, 1); 
+    let pixel = this.path.getImageData(next_x, next_y, 1, 1);
     if (
       pixel.data[0] === PATH_COLOR_R &&
       pixel.data[1] === PATH_COLOR_G &&

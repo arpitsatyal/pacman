@@ -42,11 +42,12 @@ class Game {
   play() {
     const btn = document.getElementById("play");
     btn.onclick = () => {
-      document.getElementById("game_start").style.display = 'none';
+      document.getElementById("game_start").style.display = "none";
       document.getElementById("canvas").style.display = "block";
       document.getElementById("volume").style.display = "block";
       document.getElementById("restart").style.display = "block";
       document.getElementById("scores").style.display = "flex";
+
       this.count += 1;
       if (this.count % 2 !== 0) {
         btn.innerHTML = "Pause";
@@ -78,6 +79,7 @@ class Game {
     const btn = document.getElementById("restart");
     btn.onclick = () => {
       this.currentLevel = 1;
+      FRIGHTENED_DURATION = 7;
       document.getElementById("play").style.display = "block";
       document.getElementById("curLevel").innerHTML = 1;
       this.score = 0;
@@ -91,6 +93,7 @@ class Game {
       this.world.balls.matrix = [...this.world.balls.matrix_copy];
       this.world.balls.remaining = 258;
 
+      this.pacman.dir = "";
       this.pacman.changeFrameSet(this.pacman.frame_sets["right"], "loop");
       this.blinky.changeFrameSet(this.blinky.frame_sets["up"], "loop");
       this.pinky.changeFrameSet(this.pinky.frame_sets["up"], "loop");

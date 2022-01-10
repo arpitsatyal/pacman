@@ -84,6 +84,7 @@ Change the mode of the ghosts according to the wave that corresponds to the elap
 
       // LEVEL 2 //
     } else if (game.currentLevel === 2) {
+      FRIGHTENED_DURATION = 4;
       if (game.frames_rendered >= 1 && game.frames_rendered <= 7 * FPS)
         this.inScatterMode(game.pacman);
       else if (
@@ -104,8 +105,9 @@ Change the mode of the ghosts according to the wave that corresponds to the elap
         this.inChaseMode(game.pacman);
       //wave 3
       else if (game.frames_rendered >= 52 * FPS) this.inChaseMode(game.pacman);
-
+        // LEVEL 3
     } else if (game.currentLevel === 3) {
+      FRIGHTENED_DURATION = 0;
       //wave 1
       if (game.frames_rendered >= 1 && game.frames_rendered <= 7 * FPS)
         this.inScatterMode(game.pacman);

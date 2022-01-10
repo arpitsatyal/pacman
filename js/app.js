@@ -4,7 +4,7 @@ window.onload = function () {
     such as the pacman, the ghost, the walls, the balls, etc.
     */
   function render() {
-    let frame_aux;
+    let frame;
     //draw background
     display.fill(game.world.background_color);
 
@@ -14,63 +14,63 @@ window.onload = function () {
 
     //draw pacman
     //take the frame that the pacman object currently has
-    frame_aux = game.tile_set.frames[game.pacman.frame_value];
+    frame = game.tile_set.frames[game.pacman.frame_value];
     display.drawObject(
       assets_manager.tile_set_image,
-      frame_aux.x,
-      frame_aux.y,
+      frame.x,
+      frame.y,
       game.pacman.x + 1,
       game.pacman.y + 1,
-      frame_aux.width,
-      frame_aux.height
+      frame.width,
+      frame.height
     );
 
     // //blinky
-    frame_aux = game.tile_set.frames[game.blinky.frame_value];
+    frame = game.tile_set.frames[game.blinky.frame_value];
     display.drawObject(
       assets_manager.tile_set_image,
-      frame_aux.x,
-      frame_aux.y,
+      frame.x,
+      frame.y,
       game.blinky.x + 1,
       game.blinky.y + 1,
-      frame_aux.width,
-      frame_aux.height
+      frame.width,
+      frame.height
     );
 
     //inky
-    frame_aux = game.tile_set.frames[game.inky.frame_value];
+    frame = game.tile_set.frames[game.inky.frame_value];
     display.drawObject(
       assets_manager.tile_set_image,
-      frame_aux.x,
-      frame_aux.y,
+      frame.x,
+      frame.y,
       game.inky.x + 1,
       game.inky.y + 1,
-      frame_aux.width,
-      frame_aux.height
+      frame.width,
+      frame.height
     );
 
     //clyde
-    frame_aux = game.tile_set.frames[game.clyde.frame_value];
+    frame = game.tile_set.frames[game.clyde.frame_value];
     display.drawObject(
       assets_manager.tile_set_image,
-      frame_aux.x,
-      frame_aux.y,
+      frame.x,
+      frame.y,
       game.clyde.x + 1,
       game.clyde.y + 1,
-      frame_aux.width,
-      frame_aux.height
+      frame.width,
+      frame.height
     );
 
     //pinky
-    frame_aux = game.tile_set.frames[game.pinky.frame_value];
+    frame = game.tile_set.frames[game.pinky.frame_value];
     display.drawObject(
       assets_manager.tile_set_image,
-      frame_aux.x,
-      frame_aux.y,
+      frame.x,
+      frame.y,
       game.pinky.x + 1,
       game.pinky.y + 1,
-      frame_aux.width,
-      frame_aux.height
+      frame.width,
+      frame.height
     );
 
     //ready notification
@@ -117,6 +117,7 @@ window.onload = function () {
     }
 
     if (game.currentLevel > 3) {
+      game.world.balls.matrix = game.world.balls.matrix.map(ball => ball !==0 ? ball = 0 : '');
       document.getElementById("curLevel").innerHTML = 3;
       game.ready_notification = false;
       game.game_over_notification = true;
@@ -127,7 +128,6 @@ window.onload = function () {
 
     if (game.world.balls.remaining === 0) {
       if (!game.is_reseting_level) {
-        game.isOver = true;
         game.wait(4);
         game.is_reseting = true;
         game.is_reseting_level = true;
@@ -140,7 +140,6 @@ window.onload = function () {
   }
 
   function resize() {
-    //we subtract CANVAS_MARGIN_TOP so that the canvas leaves space for marker
     display.resize(
       document.documentElement.clientWidth - CANVAS_MARGIN_HORIZONTAL,
       document.documentElement.clientHeight - CANVAS_MARGIN_VERTICAL,

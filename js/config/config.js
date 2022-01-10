@@ -10,10 +10,10 @@ const TILE_SIZE = 12;
 const SPRITE_SIZE = 24;
 const NCOLS = SCREEN_WIDTH / TILE_SIZE; //(28)
 const NROWS = SCREEN_HEIGHT / TILE_SIZE; //(31)
-const PATH_COLOR_R = 0;
-const PATH_COLOR_G = 252;
+const PATH_COLOR_R = 0; //not visible
+const PATH_COLOR_G = 252; //fully visible
 const PATH_COLOR_B = 30;
-const FRIGHTENED_DURATION = 7; 
+let FRIGHTENED_DURATION = 7; 
 
 //POSITIONS
 const PACMAN_INIT_POS = [156, 270];
