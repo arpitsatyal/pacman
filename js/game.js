@@ -25,6 +25,7 @@ class Game {
 
     this.score = 0;
     this.highScore = 0;
+    this.currentLevel = 1;
 
     this.sound = true;
     this.sounds = [];
@@ -71,16 +72,21 @@ class Game {
   restart() {
     const btn = document.getElementById("restart");
     btn.onclick = () => {
+      this.currentLevel = 1;
+      document.getElementById("play").style.display = "block";
+      document.getElementById("curLevel").innerHTML = 1;
       this.score = 0;
       this.setPause();
       this.preloadAudios();
       this.sounds["music"].play();
+      this.wait(4);
+      this.showReadyNotification(5);
       this.reset();
       this.game_over_notification = false;
       this.world.balls.matrix = [...this.world.balls.matrix_copy];
       this.world.balls.remaining = 258;
 
-      this.pacman.changeFrameSet(this.pacman.frame_sets["up"], "loop");
+      this.pacman.changeFrameSet(this.pacman.frame_sets["right"], "loop");
       this.blinky.changeFrameSet(this.blinky.frame_sets["up"], "loop");
       this.pinky.changeFrameSet(this.pinky.frame_sets["up"], "loop");
       this.inky.changeFrameSet(this.inky.frame_sets["up"], "loop");
@@ -135,20 +141,75 @@ class Game {
 controls the output of different ghosts
 */
   manageGhostDeparture() {
-    if (this.frames_rendered == 5 * FPS && this.pinky.behaviour == "waiting") {
-      //sale pinky
-      this.pinky.behaviour = "";
-      this.openHome();
-    }
-    if (this.frames_rendered == 10 * FPS && this.inky.behaviour == "waiting") {
-      //sale inky
-      this.inky.behaviour = "";
-      this.openHome();
-    }
-    if (this.frames_rendered == 15 * FPS && this.clyde.behaviour == "waiting") {
-      //sale clyde
-      this.clyde.behaviour = "";
-      this.openHome();
+    if (this.currentLevel === 1) {
+      if (
+        this.frames_rendered == 5 * FPS &&
+        this.pinky.behaviour == "waiting"
+      ) {
+        //sale pinky
+        this.pinky.behaviour = "";
+        this.openHome();
+      }
+      if (
+        this.frames_rendered == 10 * FPS &&
+        this.inky.behaviour == "waiting"
+      ) {
+        //sale inky
+        this.inky.behaviour = "";
+        this.openHome();
+      }
+      if (
+        this.frames_rendered == 15 * FPS &&
+        this.clyde.behaviour == "waiting"
+      ) {
+        //sale clyde
+        this.clyde.behaviour = "";
+        this.openHome();
+      }
+    } else if (this.currentLevel === 2) {
+      if (
+        this.frames_rendered == 2 * FPS &&
+        this.pinky.behaviour == "waiting"
+      ) {
+        //sale pinky
+        this.pinky.behaviour = "";
+        this.openHome();
+      }
+      if (this.frames_rendered == 5 * FPS && this.inky.behaviour == "waiting") {
+        //sale inky
+        this.inky.behaviour = "";
+        this.openHome();
+      }
+      if (
+        this.frames_rendered == 8 * FPS &&
+        this.clyde.behaviour == "waiting"
+      ) {
+        //sale clyde
+        this.clyde.behaviour = "";
+        this.openHome();
+      }
+    } else {
+      if (
+        this.frames_rendered == 2 * FPS &&
+        this.pinky.behaviour == "waiting"
+      ) {
+        //sale pinky
+        this.pinky.behaviour = "";
+        this.openHome();
+      }
+      if (this.frames_rendered == 4 * FPS && this.inky.behaviour == "waiting") {
+        //sale inky
+        this.inky.behaviour = "";
+        this.openHome();
+      }
+      if (
+        this.frames_rendered == 6 * FPS &&
+        this.clyde.behaviour == "waiting"
+      ) {
+        //sale clyde
+        this.clyde.behaviour = "";
+        this.openHome();
+      }
     }
   }
 
@@ -222,7 +283,7 @@ relocate the ghosts and pacman
 
     this.frames_rendered = 0;
     this.closeHome();
-    
+
     this.pacman.changeFrameSet(this.pacman.frame_sets["right"], "loop");
     this.blinky.changeFrameSet(this.blinky.frame_sets["right"], "loop");
     this.pinky.changeFrameSet(this.pinky.frame_sets["right"], "loop");
@@ -303,4 +364,11 @@ relocate the ghosts and pacman
       sound_button.style.backgroundImage = "url('assets/sound_on.png')";
     }
   };
+
+  resetLevel() {
+    this.world.balls.matrix = [...this.world.balls.matrix_copy];
+    this.world.balls.remaining = 258;
+    this.setPause();
+    this.is_reseting_level = false;
+  }
 }

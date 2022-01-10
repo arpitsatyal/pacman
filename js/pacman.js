@@ -55,10 +55,6 @@ class Pacman extends Travel {
 Consume a ball if it exists in your position.
 */
   eatBall(game) {
-    if(game.world.balls.remaining === 0) {
-      game.game_over_notification = true;
-      game.paused = true;
-    };
     let eated_ball = game.world.balls.setBall(this.x, this.y);
     if(eated_ball === 1){ 
     if(game.sound) game.sounds["eat_ball"].play();   

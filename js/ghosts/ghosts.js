@@ -43,29 +43,89 @@ Performs all the actions of its life cycle
 Change the mode of the ghosts according to the wave that corresponds to the elapsed time
 */
   applyBehaviourWaves(game) {
-    //wave 1
-    if(game.frames_rendered >= 1 && game.frames_rendered <= 7*FPS) 
-            this.inScatterMode(game.pacman);
-        else if(game.frames_rendered > 7*FPS && game.frames_rendered < 27*FPS) 
-            this.inChaseMode(game.pacman);
+    if (game.currentLevel === 1) {
+      //wave 1
+      if (game.frames_rendered >= 1 && game.frames_rendered <= 7 * FPS)
+        this.inScatterMode(game.pacman);
+      else if (
+        game.frames_rendered > 7 * FPS &&
+        game.frames_rendered < 27 * FPS
+      )
+        this.inChaseMode(game.pacman);
+      //wave 2
+      else if (
+        game.frames_rendered >= 27 * FPS &&
+        game.frames_rendered < 32 * FPS
+      )
+        this.inScatterMode(game.pacman);
+      else if (
+        game.frames_rendered > 32 * FPS &&
+        game.frames_rendered < 52 * FPS
+      )
+        this.inChaseMode(game.pacman);
+      //wave 3
+      else if (
+        game.frames_rendered >= 52 * FPS &&
+        game.frames_rendered < 58 * FPS
+      )
+        this.inScatterMode(game.pacman);
+      else if (
+        game.frames_rendered > 58 * FPS &&
+        game.frames_rendered < 78 * FPS
+      )
+        this.inChaseMode(game.pacman);
+      //wave 4
+      else if (
+        game.frames_rendered >= 78 * FPS &&
+        game.frames_rendered < 84 * FPS
+      )
+        this.inScatterMode(game.pacman);
+      else if (game.frames_rendered > 84 * FPS) this.inChaseMode(game.pacman);
 
-        //wave 2
-        else if(game.frames_rendered >= 27*FPS && game.frames_rendered < 32*FPS) 
-            this.inScatterMode(game.pacman);
-        else if(game.frames_rendered > 32*FPS && game.frames_rendered < 52*FPS) 
-            this.inChaseMode(game.pacman);
+      // LEVEL 2 //
+    } else if (game.currentLevel === 2) {
+      if (game.frames_rendered >= 1 && game.frames_rendered <= 7 * FPS)
+        this.inScatterMode(game.pacman);
+      else if (
+        game.frames_rendered > 7 * FPS &&
+        game.frames_rendered < 27 * FPS
+      )
+        this.inChaseMode(game.pacman);
+      //wave 2
+      else if (
+        game.frames_rendered >= 27 * FPS &&
+        game.frames_rendered < 32 * FPS
+      )
+        this.inScatterMode(game.pacman);
+      else if (
+        game.frames_rendered > 32 * FPS &&
+        game.frames_rendered < 52 * FPS
+      )
+        this.inChaseMode(game.pacman);
+      //wave 3
+      else if (game.frames_rendered >= 52 * FPS) this.inChaseMode(game.pacman);
 
-        //wave 3
-        else if(game.frames_rendered >= 52*FPS && game.frames_rendered < 58*FPS) 
-            this.inScatterMode(game.pacman);
-        else if(game.frames_rendered > 58*FPS && game.frames_rendered < 78*FPS) 
-            this.inChaseMode(game.pacman);
-
-        //wave 4
-        else if(game.frames_rendered >= 78*FPS && game.frames_rendered < 84*FPS) 
-            this.inScatterMode(game.pacman);
-        else if(game.frames_rendered > 84*FPS) 
-            this.inChaseMode(game.pacman);
+    } else if (game.currentLevel === 3) {
+      //wave 1
+      if (game.frames_rendered >= 1 && game.frames_rendered <= 7 * FPS)
+        this.inScatterMode(game.pacman);
+      else if (
+        game.frames_rendered > 7 * FPS &&
+        game.frames_rendered < 27 * FPS
+      )
+        this.inChaseMode(game.pacman);
+      //wave 2
+      else if (
+        game.frames_rendered >= 27 * FPS &&
+        game.frames_rendered < 32 * FPS
+      )
+        this.inScatterMode(game.pacman);
+      else if (game.frames_rendered > 32 * FPS) this.inChaseMode(game.pacman);
+    } else {
+      //end the game
+        game.game_over_notification = true;
+        game.paused = true;
+    }
   }
 
   /**
@@ -302,13 +362,12 @@ Distance in px from tile A to another tile B. Using Pythagoras theorem.
   valueInRange(value, min, max) {
     return value >= min && value <= max;
   }
- 
-  collides(pacmanX, pacmanY) {
 
+  collides(pacmanX, pacmanY) {
     let xOverlap =
       this.valueInRange(pacmanX + 20, this.x + 20, this.x + 35) ||
       this.valueInRange(this.x + 20, pacmanX + 20, pacmanX + 35);
-      
+
     let yOverlap =
       this.valueInRange(pacmanY + 20, this.y + 20, this.y + 35) ||
       this.valueInRange(this.y + 20, pacmanY + 20, pacmanY + 35);

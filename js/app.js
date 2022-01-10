@@ -85,15 +85,19 @@ window.onload = function () {
         READY_HEIGHT
       );
     }
-  
-    //game over 
-    if(game.game_over_notification){
-      display.drawObject(assets_manager.game_over,
-          0, 0,
-          GAMEOVER_X,
-          GAMEOVER_Y,
-          GAMEOVER_WIDTH, GAMEOVER_HEIGHT);
-  }
+
+    //game over
+    if (game.game_over_notification) {
+      display.drawObject(
+        assets_manager.game_over,
+        0,
+        0,
+        GAMEOVER_X,
+        GAMEOVER_Y,
+        GAMEOVER_WIDTH,
+        GAMEOVER_HEIGHT
+      );
+    }
 
     display.render();
     //dump the buffer to the final canvas
@@ -110,6 +114,28 @@ window.onload = function () {
       game.manageGhostDeparture();
       game.checkPacmanGhostsCollision();
       game.manageGhostSounds();
+    }
+
+    if (game.currentLevel > 3) {
+      document.getElementById("curLevel").innerHTML = 3;
+      game.ready_notification = false;
+      game.game_over_notification = true;
+      game.paused = true;
+      game.setPause();
+      document.getElementById("play").style.display = "none";
+    }
+
+    if (game.world.balls.remaining === 0) {
+      if (!game.is_reseting_level) {
+        game.isOver = true;
+        game.wait(4);
+        game.is_reseting = true;
+        game.is_reseting_level = true;
+        game.reset();
+        game.resetLevel();
+        game.currentLevel++;
+        document.getElementById("curLevel").innerHTML = game.currentLevel;
+      }
     }
   }
 

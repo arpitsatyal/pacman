@@ -10,6 +10,7 @@ body{
     font-size: 12pt;
     margin: 0;
     background: black;
+    color: white;
     text-align:center;
 }
 header {
@@ -49,11 +50,10 @@ header {
 }
 #volume {
     float: right;
-    margin-top: 20px;
     background-image: url('assets/sound_on.png');
     background-repeat: no-repeat;
     background-size: 48px 48px;
-    width: 20%;
+    width: 25%;
     height: 48px;
 }
 
@@ -79,5 +79,14 @@ button:focus {
 }
 
 #buttonz {
-    margin: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 60px;
+}
+#level {
+    font-size: 1em;
+    padding: 30px;
+    color: white;
+    text-align: left;
+    width: 30%;
 }
