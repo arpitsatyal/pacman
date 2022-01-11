@@ -50,7 +50,7 @@ body{
     background-image: url('assets/sound_on.png');
     background-repeat: no-repeat;
     background-size: 48px 48px;
-    width: 25%;
+    width: 20%;
     height: 48px;
 }
 
@@ -78,7 +78,7 @@ button:focus {
 #buttonz {
     display: flex;
     justify-content: space-evenly;
-    margin-left: 60px;
+    width: 100%;
 }
 #level {
     font-size: 1em;
@@ -87,9 +87,21 @@ button:focus {
     text-align: left;
     width: 30%;
 }
-#canvas, #scores, #volume, #restart, #path {
+#canvas, #scores, #volume, #restart, #lives, #path {
     display: none;
 }
 #game_start {
     margin: 100px 100px 50px 150px;
+}
+#lives{
+    text-align: left;   
+    width: 40%; 
+}
+#play, #restart {
+    width: 20%;
+}
+
+#lives img{
+    width: 2em;
+    padding: 10px;
 }

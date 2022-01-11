@@ -11,7 +11,7 @@ class Inky extends Ghost {
       down: [105, 106],
       left: [107, 108],
       up: [109, 110],
-      frightened: [119, 120, 121, 122],
+      frightened: [122, 120, 121, 119],
       returning_right: [111, 112],
       returning_down: [113, 114],
       returning_left: [115, 116],

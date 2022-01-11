@@ -26,6 +26,8 @@ class Game {
     this.score = 0;
     this.highScore = 0;
     this.currentLevel = 1;
+    this.lives = 3;
+    this.points_per_ghost = 200;
 
     this.sound = true;
     this.sounds = [];
@@ -46,6 +48,7 @@ class Game {
       document.getElementById("canvas").style.display = "block";
       document.getElementById("volume").style.display = "block";
       document.getElementById("restart").style.display = "block";
+      document.getElementById("lives").style.display = "block";
       document.getElementById("scores").style.display = "flex";
 
       this.count += 1;
@@ -57,9 +60,10 @@ class Game {
           this.sounds["music"].play();
           this.wait(4);
           this.showReadyNotification(3);
+          this.drawLives();
         }
       } else {
-        btn.innerHTML = "Resume Play";
+        btn.innerHTML = "Resume";
         this.paused = true;
         this.setPause();
       }
@@ -79,6 +83,7 @@ class Game {
     const btn = document.getElementById("restart");
     btn.onclick = () => {
       this.currentLevel = 1;
+      this.lives = 3;
       FRIGHTENED_DURATION = 7;
       document.getElementById("play").style.display = "block";
       document.getElementById("curLevel").innerHTML = 1;
@@ -248,6 +253,9 @@ controls the output of different ghosts
 relocate the ghosts and pacman
 */
   reset = () => {
+    if (this.world.balls.remaining === 0 && this.currentLevel <= 3) this.lives++;
+    this.drawLives();
+
     this.pacman.x = PACMAN_INIT_POS[0];
     this.pacman.y = PACMAN_INIT_POS[1];
     this.pacman.dir = "right";
@@ -286,11 +294,17 @@ relocate the ghosts and pacman
     this.pinky.dir = "";
     this.pinky.next_dir = "";
 
-    this.wait(3);
-    this.showReadyNotification(3);
+    if (this.lives === 0) {
+      this.paused = true;
+      this.game_over_notification = true;
+      document.getElementById("play").style.display = "none";
+    } else {
+      this.wait(3);
+      this.showReadyNotification(3);
 
-    this.frames_rendered = 0;
-    this.closeHome();
+      this.frames_rendered = 0;
+      this.closeHome();
+    }
 
     this.pacman.changeFrameSet(this.pacman.frame_sets["right"], "loop");
     this.blinky.changeFrameSet(this.blinky.frame_sets["right"], "loop");
@@ -304,27 +318,33 @@ relocate the ghosts and pacman
 
   checkPacmanGhostsCollision() {
     const ghosts = ["blinky", "pinky", "inky", "clyde"];
-    ghosts.forEach((ghost) => this.returnToHome(this[ghost]));
-  }
-
-  returnToHome(ghost) {
-    if (ghost.collides(this.pacman.x, this.pacman.y)) {
-      if (ghost.behaviour != "frightened" && ghost.behaviour != "returning") {
-        this.pacman.die(this);
-        if (!this.is_reseting) {
-          this.is_reseting = true;
-          setTimeout(this.reset, 1600);
-        }
-      } else {
-        if (this.sound) {
-          this.sounds["eat_ghost"].play();
+    ghosts.forEach(ghost => {
+      if (this[ghost].collides(this.pacman.x, this.pacman.y)) {
+        if (
+          this[ghost].behaviour != "frightened" &&
+          this[ghost].behaviour != "returning"
+        ) {
+          this.pacman.die(this);
+          if (!this.is_reseting) {
+            this.is_reseting = true;
+            this.lives--;
+            setTimeout(this.reset, 1600);
+          }
+        } else {
+          if (
+            this[ghost].behaviour === "frightened" &&
+            this[ghost].behaviour != "returning"
+          ) {
+            this.incScore(this.points_per_ghost);
+            this.sounds["eat_ghost"].play();
+            this.points_per_ghost *= 2;
+          }
+          this[ghost].behaviour = "returning";
           this.sounds["returning"].play();
+          this[ghost].targetTile = [...HOME_ENTRANCE_TILE];
         }
-        this.incScore(POINTS_PER_GHOST);
-        ghost.behaviour = "returning";
-        ghost.targetTile = [...HOME_ENTRANCE_TILE];
       }
-    }
+    })
   }
 
   incScore(value) {
@@ -378,5 +398,15 @@ relocate the ghosts and pacman
     this.world.balls.remaining = 258;
     this.setPause();
     this.is_reseting_level = false;
+  }
+
+  drawLives() {
+    let lives = document.getElementById("lives");
+    lives.innerHTML = "";
+    for (let i = 0; i < this.lives; i++) {
+      let live = document.createElement("img");
+      live.src = "assets/pacman_live.png";
+      lives.appendChild(live);
+    }
   }
 }

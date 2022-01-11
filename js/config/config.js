@@ -33,7 +33,6 @@ const HOME_ENTRANCE_TILE= [11,13];
 
 const BALL_1_SCORE = 5;
 const BALL_2_SCORE = 10;
-const POINTS_PER_GHOST = 20;
 
 //SPRITES
 const ASSETS_SPRITES = "assets/spritemap.png";
